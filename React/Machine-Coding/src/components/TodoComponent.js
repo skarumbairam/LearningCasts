@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TodoComponent = () => {
-  const [todoItems, setTodoItems] = useState([]);
+  const [todoItems, setTodoItems] = useState(
+    JSON.parse(localStorage.getItem("todolist-react"))
+  );
   const [inputText, setInputText] = useState("");
 
   const formSubmitHandler = (e) => {
@@ -36,6 +38,19 @@ const TodoComponent = () => {
     setTodoItems(updateItem);
   };
 
+  useEffect(() => {
+    updateLS();
+  }, [todoItems]);
+
+  useEffect(() => {
+    //const getLS = JSON.parse(localStorage.getItem("todolist-react"));
+    //setTodoItems(getLS);
+  }, []);
+
+  const updateLS = () => {
+    localStorage.setItem("todolist-react", JSON.stringify(todoItems));
+  };
+
   return (
     <div className="container">
       <form
@@ -48,7 +63,7 @@ const TodoComponent = () => {
             id="inputBox"
             type="text"
             placeholder="Type Your Todo Item"
-            class="form-control"
+            className="form-control"
             aria-label="Action Item List"
             value={inputText}
             onChange={(e) => {
@@ -64,6 +79,7 @@ const TodoComponent = () => {
           {todoItems.map((todo, index) => {
             return (
               <TodoItem
+                key={todo.id}
                 todo={todo}
                 id={todo.id}
                 deleteHandler={todoDeleteHandler}
@@ -99,10 +115,7 @@ const TodoItem = ({ todo, deleteHandler, editHandler, id }) => {
   };
 
   return (
-    <li
-      key={todo.id}
-      className="d-flex flex-row justify-content-between align-items-center p-3 border-dark border-bottom"
-    >
+    <li className="d-flex flex-row justify-content-between align-items-center p-3 border-dark border-bottom">
       <p>
         {todo.id} - {todo.value}
       </p>
