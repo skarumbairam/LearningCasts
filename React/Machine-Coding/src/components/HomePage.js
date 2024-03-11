@@ -25,28 +25,10 @@ const HomePage = () => {
   return (
     <div className="container" style={style.light}>
       <h1> Home Page - Containst Machine Coding Collection</h1>
-
       <div className="row">
-        <h3>ImageCarousel</h3>
-        <ImageCarousel />
-      </div>
-      <div className="row">
-        <h3>Pagination Compoent</h3>
-        <PaginationComponent />
-      </div>
-
-      <div className="row">
-        <h3>Todo List Component</h3>
+        <h3>1. Todo List Component</h3>
         <TodoComponent />
       </div>
-
-      <div className="row">
-        <h3>Tic Toc Game</h3>
-        <TicTocComponent />
-      </div>
-
-      <h3>Accordian Component</h3>
-      <AccordianComponent />
     </div>
   );
 };

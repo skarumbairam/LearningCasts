@@ -1,107 +1,131 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TodoComponent = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [todosList, setTodosList] = useState(getToDosList);
+  const [todoItems, setTodoItems] = useState([]);
+  const [inputText, setInputText] = useState("");
 
-  const saveToDosList = () => {
-    localStorage.setItem("todosList", JSON.stringify(todosList));
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    addTodoItem();
   };
 
-  function getToDosList() {
-    if (localStorage.getItem("todosList")) {
-      const list = localStorage.getItem("todosList") || [];
-      return JSON.parse(list);
-    }
-
-    return [];
-  }
-
-  useEffect(() => {
-    saveToDosList();
-  }, [todosList]);
-
-  // {task: '', id: ''};
-  const onChangeHandler = (e) => {
-    setInputValue(e.target.value);
-  };
-  const onSubmitHandler = (e) => {
-    if (inputValue === "") return;
-    const addNewList = { task: inputValue, id: todosList.length + 1 };
-    setTodosList([...todosList, addNewList]);
-    setInputValue("");
+  const inputChageHandler = (e) => {
+    const tempTextInput = e.target.value;
+    setInputText(tempTextInput);
   };
 
-  const removeTaskHandler = (taskId) => {
-    const filteredList = todosList.filter((item, idx) => item.id !== taskId);
-    setTodosList(filteredList);
+  const addTodoItem = () => {
+    const tempTodos = [{ value: inputText, id: todoItems.length }];
+    setTodoItems([...todoItems, ...tempTodos]);
+    setInputText("");
+  };
+
+  const todoDeleteHandler = (id) => {
+    console.log("ida", id);
+    setTodoItems(todoItems.filter((item) => item.id !== id));
+  };
+
+  const todoEditHandler = (id, value) => {
+    const updateItem = todoItems.map((item, idx) => {
+      if (item.id === id) {
+        item.value = value;
+      }
+      return item;
+    });
+
+    setTodoItems(updateItem);
   };
 
   return (
     <div className="container">
-      <div className>
-        <form onSubmit={onSubmitHandler}>
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Type your todo list item"
-              value={inputValue}
-              aria-label=""
-              aria-describedby="basic-addon1"
-              onChange={(e) => onChangeHandler(e)}
-            />
-            <div class="input-group-prepend">
-              <button
-                class="btn btn-outline-secondary "
-                type="button"
-                onClick={() => onSubmitHandler()}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div className="">
-        {todosList.map((list) => (
-          <ListComponent
-            key={list.id}
-            task={list.task}
-            taskId={list.id}
-            removeHandler={removeTaskHandler}
+      <form
+        onSubmit={(e) => {
+          formSubmitHandler(e);
+        }}
+      >
+        <div className="input-group mb-3">
+          <input
+            id="inputBox"
+            type="text"
+            placeholder="Type Your Todo Item"
+            class="form-control"
+            aria-label="Action Item List"
+            value={inputText}
+            onChange={(e) => {
+              inputChageHandler(e);
+            }}
           />
-        ))}
+          <button className="btn border">Submit</button>
+        </div>
+      </form>
+
+      <div className="todolist-container">
+        <ul>
+          {todoItems.map((todo, index) => {
+            return (
+              <TodoItem
+                todo={todo}
+                id={todo.id}
+                deleteHandler={todoDeleteHandler}
+                editHandler={todoEditHandler}
+              />
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
 };
 
-const ListComponent = ({ task, taskId, removeHandler }) => {
-  const [select, setSelect] = useState(false);
-  const onClickHandler = () => {
-    removeHandler(taskId);
+const TodoItem = ({ todo, deleteHandler, editHandler, id }) => {
+  const [editOpition, setEditOpetion] = useState(false);
+  const [editinput, setEditInput] = useState("");
+
+  const todoDeleteHandler = () => {
+    deleteHandler(id);
   };
 
-  const selectTask = () => {
-    setSelect(!select);
+  const todoEditHandler = (id) => {
+    setEditOpetion(true);
+  };
+
+  const editinputHandler = (e) => {
+    setEditInput(e.target.value);
+  };
+
+  const editSubmitHandler = () => {
+    setEditOpetion(false);
+    editHandler(id, editinput);
   };
 
   return (
-    <div className="listComponent">
-      <p className={select ? "strike" : ""} onClick={() => selectTask()}>
-        {task}
+    <li
+      key={todo.id}
+      className="d-flex flex-row justify-content-between align-items-center p-3 border-dark border-bottom"
+    >
+      <p>
+        {todo.id} - {todo.value}
       </p>
-      <button
-        className="btn"
-        onClick={() => {
-          onClickHandler();
-        }}
-      >
-        Remove
+      <button className="btn border" onClick={() => todoEditHandler()}>
+        Edit
       </button>
-    </div>
+      <button className="btn border" onClick={() => todoDeleteHandler()}>
+        Delete
+      </button>
+      {editOpition && (
+        <div className="d-flex flex-row justify-content-between align-items-center">
+          <input
+            type="text"
+            id="editInput"
+            value={editinput}
+            onChange={(e) => editinputHandler(e)}
+          />
+          <button className="btn border" onClick={() => editSubmitHandler()}>
+            Submit
+          </button>
+        </div>
+      )}
+    </li>
   );
 };
-
 export default TodoComponent;
