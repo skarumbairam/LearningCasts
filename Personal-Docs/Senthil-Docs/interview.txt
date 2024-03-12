@@ -1,0 +1,45 @@
+Recuroter & Hiring Manager:
+I am an experienced IT professional proficient in software engineering, both individually and collaboratively.
+I excel in adapting to new technologies and managing priorities in demanding environments.
+I have led initiatives for personalized user experience to target revisit users
+Notably working on a project developing SDK for global navigation that provides uniform experience across domain, where multiple downstream application
+
+I am eager to expand my expertise further in my next role.
+
+================================================================================
+Tell About Your self:
+Hey ----- Goodmorning!,
+
+I am Senthilkumar from Cement City of Tamilnadu is called Ariyalur. I have 12 years of experience in IT industry, 
+since last 4 years working as on Full stack engineer, worked on React, Node JS, Javascript projeccts etc like 
+managing application & enhancing capabilities like caching, availability, scalable.. and e2e testing & deploying to production. 
+
+Before that I was working as on complete Front end Developer worked on Javascript and HTML& CSS like building responsive websites, 
+micro websites, Emailers and HTML5 Interactive banners, Flash Banners etc.
+
+- Closly working with Core team from onsite, re-platforming intiatives if we have more tiem I can go
+- CI CD, manifest genertion,e2e tests, Console platform, Genesis monitering & alerting
+
+========================================================================================
+
+Why do you want to work here?
+I see this opportunity as a way to contribute to an exciting/forward-thinking/fast-moving company/industry, and I feel I can do so by/with my
+(or)
+I feel my skills are particularly well-suited to this position because
+(or)
+I believe I have the type of knowledge to succeed in this role and at the company because
+
+=========================================================================================
+
+
+What is your Key Strength:
+ - Dedicative & more responsiblites 
+ - Delicating responsiblites wherever applicable
+ - Active Communicatoin for top Priorites tasks
+
+What is Weakness ?
+ - Over thinking on the priorities, lined up tasks (Learning on this)
+ - I personaly like to do work alone
+ - Some time missing collbration 
+  
+=========================================================================================
