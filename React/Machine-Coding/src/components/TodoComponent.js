@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 
 const TodoComponent = () => {
   const [todoItems, setTodoItems] = useState(
-    JSON.parse(localStorage.getItem("todolist-react"))
+    localStorage.getItem("todolist-react")
+      ? JSON.parse(localStorage.getItem("todolist-react"))
+      : []
   );
+
   const [inputText, setInputText] = useState("");
 
   const formSubmitHandler = (e) => {
