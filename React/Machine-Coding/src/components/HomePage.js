@@ -1,5 +1,6 @@
 import TodoComponent from "./TodoComponent";
 import Autocomplete from "./Autocomplete";
+import QuizeComponent from "./QuizComponent";
 import SearchComponent from "./SearchComponent";
 import TicTocComponent from "./TicTocComponent";
 import FormComponent from "./FormComponent";
@@ -31,6 +32,10 @@ const HomePage = () => {
         <TodoComponent />
         <h3>2. Autocomplete Component</h3>
         <Autocomplete />
+        <h3>3. Quiz Component</h3>
+        <QuizeComponent />
+        <h3>4. TicTocComponent</h3>
+        <TicTocComponent />
       </div>
     </div>
   );

@@ -1294,3 +1294,24 @@ export const PaginationData = [
   { id: 15, name: "Kavas", email: "skarumbairam@gmail.com" },
   { id: 16, name: "Apps", email: "skarumbairam@gmail.com" },
 ];
+
+export const QuizData = [
+  {
+    question: "What is largest planet in our solar system?",
+    answerOptions: [
+      { text: "Saturn", isCorrect: false },
+      { text: "Mars", isCorrect: false },
+      { text: "Earth", isCorrect: false },
+      { text: "Jupitar", isCorrect: true },
+    ],
+  },
+  {
+    question: "Which is capital of India?",
+    answerOptions: [
+      { text: "Delhi", isCorrect: true },
+      { text: "Chennai", isCorrect: false },
+      { text: "Bangalore", isCorrect: false },
+      { text: "Jaipur", isCorrect: false },
+    ],
+  },
+];

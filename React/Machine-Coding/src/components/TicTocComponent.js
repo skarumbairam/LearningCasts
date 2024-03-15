@@ -1,40 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Patterns } from "../util/data";
+import { UserNameContext } from "../App";
+
 const TicTocComponent = () => {
+  const userName = useContext(UserNameContext);
   return (
-    <div className="tictocContainer">
+    <div className="container">
+      {userName}
       <Board />
     </div>
   );
 };
 export default TicTocComponent;
 
-const Square = ({ value, squareClick, index }) => {
-  const clickHandler = () => {
-    squareClick(index);
-  };
-
-  return (
-    <div
-      className="square"
-      onClick={() => {
-        clickHandler();
-      }}
-    >
-      {value}
-    </div>
-  );
-};
-
 const Board = () => {
   const [square, setSquare] = useState(["", "", "", "", "", "", "", "", ""]);
   const [player, setPlayer] = useState("O");
   const [result, setResult] = useState({ winner: "none", status: "none" });
+  const winnerPattern = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [6, 4, 2],
+    [0, 4, 8],
+  ];
 
-  useEffect(() => {
-    checkWinner();
+  const onClickHandler = (index) => {
+    if (square[index] !== "") return;
+    const currentPlayer = square.map((el, id) => {
+      if (id === index && el === "") {
+        return player;
+      }
+      return el;
+    });
+    setSquare([...currentPlayer]);
     changePlayer();
-  }, [square]);
+  };
 
   const changePlayer = () => {
     if (player === "X") {
@@ -42,66 +46,76 @@ const Board = () => {
     } else {
       setPlayer("X");
     }
+
     return player;
   };
 
-  const boardClick = (currId) => {
-    if (square[currId] !== "") return;
-    setSquare(
-      square.map((item, idx) => {
-        if (idx == currId && item == "") {
-          return player;
-        }
-        return item;
-      })
-    );
-  };
-
-  const resetGame = () => {
-    setResult({ winner: "none", status: "none" });
-    setPlayer("O");
+  const resetHandler = () => {
+    setPlayer("X");
     setSquare(Array(9).fill(""));
   };
 
   const checkWinner = () => {
-    Patterns.forEach((currentPattern) => {
-      const currentPlayer = square[currentPattern[0]];
+    winnerPattern.forEach((pattern) => {
+      const currentPlayer = square[pattern[0]];
       if (currentPlayer === "") return;
       let foundWinner = true;
-      currentPattern.forEach((el) => {
+      pattern.forEach((el) => {
         if (square[el] !== currentPlayer) {
           foundWinner = false;
         }
       });
+
       if (foundWinner) {
-        setResult({ winner: player, status: "Won" });
+        setResult({ winner: player, status: "Won the game!" });
       }
     });
   };
 
+  useEffect(() => {
+    checkWinner();
+  }, [square]);
+
   return (
-    <div>
-      {result.status !== "none" && <h5>The winner is {result.winner}</h5>}
+    <>
+      <div className="bord">
+        {result.status !== "none" && (
+          <>Game is over, Player {result.winner} Won!</>
+        )}
+        <div className="row1 d-flex">
+          <Square value={square[0]} clickSquare={onClickHandler} index={0} />
+          <Square value={square[1]} clickSquare={onClickHandler} index={1} />
+          <Square value={square[2]} clickSquare={onClickHandler} index={2} />
+        </div>
+        <div className="row2 d-flex">
+          <Square value={square[3]} clickSquare={onClickHandler} index={3} />
+          <Square value={square[4]} clickSquare={onClickHandler} index={4} />
+          <Square value={square[5]} clickSquare={onClickHandler} index={5} />
+        </div>
+        <div className="row3 d-flex">
+          <Square value={square[6]} clickSquare={onClickHandler} index={6} />
+          <Square value={square[7]} clickSquare={onClickHandler} index={7} />
+          <Square value={square[8]} clickSquare={onClickHandler} index={8} />
+        </div>
+      </div>
+      <button onClick={() => resetHandler()}> Reset Game </button>
+    </>
+  );
+};
 
-      <div className="row">
-        <Square value={square[0]} squareClick={boardClick} index={0} />
-        <Square value={square[1]} squareClick={boardClick} index={1} />
-        <Square value={square[2]} squareClick={boardClick} index={2} />
-      </div>
-      <div className="row">
-        <Square value={square[3]} squareClick={boardClick} index={3} />
-        <Square value={square[4]} squareClick={boardClick} index={4} />
-        <Square value={square[5]} squareClick={boardClick} index={5} />
-      </div>
-      <div className="row">
-        <Square value={square[6]} squareClick={boardClick} index={6} />
-        <Square value={square[7]} squareClick={boardClick} index={7} />
-        <Square value={square[8]} squareClick={boardClick} index={8} />
-      </div>
-
-      <button className="btn" onClick={() => resetGame()}>
-        {" "}
-        Starg Game{" "}
+const Square = ({ value, clickSquare, index }) => {
+  const clickHandler = () => {
+    clickSquare(index);
+  };
+  return (
+    <div className="btn-group">
+      <button
+        type="button"
+        className="btn-outline-primary d-flex justify-content-center align-items-center"
+        style={{ width: "70px", height: "70px" }}
+        onClick={() => clickHandler()}
+      >
+        {value}
       </button>
     </div>
   );
