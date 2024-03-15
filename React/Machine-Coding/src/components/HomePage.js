@@ -1,12 +1,13 @@
 import TodoComponent from "./TodoComponent";
 import Autocomplete from "./Autocomplete";
 import QuizeComponent from "./QuizComponent";
-import SearchComponent from "./SearchComponent";
 import TicTocComponent from "./TicTocComponent";
+import PaginationComponent from "./PaginationComponent";
+
 import FormComponent from "./FormComponent";
 import StopWatchComponent from "./StopWatchComponent";
 import AccordianComponent from "./AccordianComponent";
-import PaginationComponent from "./PaginationComponent";
+
 import ImageCarousel from "./ImageCarousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
@@ -36,6 +37,8 @@ const HomePage = () => {
         <QuizeComponent />
         <h3>4. TicTocComponent</h3>
         <TicTocComponent />
+        <h3>5. PaginationComponent</h3>
+        <PaginationComponent />
       </div>
     </div>
   );
