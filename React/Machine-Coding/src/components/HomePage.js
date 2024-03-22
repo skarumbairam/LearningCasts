@@ -3,6 +3,7 @@ import Autocomplete from "./Autocomplete";
 import QuizeComponent from "./QuizComponent";
 import TicTocComponent from "./TicTocComponent";
 import PaginationComponent from "./PaginationComponent";
+import Counter from "./Counter";
 
 import FormComponent from "./FormComponent";
 import StopWatchComponent from "./StopWatchComponent";
@@ -37,8 +38,9 @@ const HomePage = () => {
         <QuizeComponent />
         <h3>4. TicTocComponent</h3>
         <TicTocComponent />
-        <h3>5. PaginationComponent</h3>
-        <PaginationComponent />
+
+        <h3>6. Counter - Using Reducer</h3>
+        <Counter />
       </div>
     </div>
   );
