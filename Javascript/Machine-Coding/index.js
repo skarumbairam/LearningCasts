@@ -271,6 +271,67 @@ const removeDuplicateChar = function (str) {
 const remove = removeDuplicateChar("");
 console.log(remove);
 
+// 14. Rotate Array
+
+const rotateArrayNtimes = function (array, ntimes) {
+  console.log("Array Rotation N times Approach 1");
+  for (let i = 0; i < ntimes; i++) {
+    array.unshift(array.pop());
+  }
+  console.log(array);
+};
+rotateArrayNtimes([1, 2, 3, 4, 5, 6], 3); // [4,5,6,1,2,3]
+
+const rotateArrayNtimes1 = function (inputArr3, k) {
+  console.log("Array Rotation N times Approach 2");
+  const result = [];
+  const n = inputArr3.length;
+  for (let i = 0; i < n; i++) {
+    if (i < k) {
+      result[i] = inputArr3[n + i - k];
+    } else {
+      result[i] = inputArr3[i - k];
+    }
+  }
+  console.log(result);
+};
+
+rotateArrayNtimes1([1, 2, 3, 4, 5, 6], 3);
+
+// 15 object flat recurssive
+
+function objectRecurssive() {
+  const resultObj = {};
+
+  const user = {
+    name: "Senthilkumar",
+    details: {
+      family: {
+        wife: "Hema",
+        son: "Havish",
+        daughter: "Dharani",
+      },
+      office: {
+        company: "PayPal",
+        city: "Bangalore",
+      },
+    },
+  };
+
+  function callObj(obj, parent) {
+    for (const key in obj) {
+      if (typeof obj[key] === "object") {
+        callObj(obj[key], `${parent}_${key}`);
+      } else {
+        resultObj[`${parent}_${obj[key]}`] = obj[key];
+      }
+    }
+  }
+
+  callObj(user, "user"); //user_name: senthilkumarr, user_name_details_family_wife:Hema,
+  console.log(resultObj);
+}
+
 //===========================================// Polifill and=================================================================================
 
 const newObj = {
