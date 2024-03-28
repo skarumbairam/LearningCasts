@@ -332,6 +332,155 @@ function objectRecurssive() {
   console.log(resultObj);
 }
 
+// 16 Get second largest value from array
+
+// approach 1
+
+const getSecondLargestValue = function (arr) {
+  console.log(" getSecondLargestValue ", arr);
+  const uniqueArray = Array.from(new Set(arr));
+  uniqueArray.sort((a, b) => a - b);
+  const result = [];
+
+  if (uniqueArray.length > 2) {
+    return uniqueArray[uniqueArray.length - 2];
+  } else {
+    return uniqueArray[0];
+  }
+};
+
+const getSecondLargestOptimised = function (arr) {
+  console.log(" getSecondLargestOptimised ", arr);
+  let largestVal = Number.NEGATIVE_INFINITY; // Can't set 0 since 0> -1
+  let secondLargestVal = Number.NEGATIVE_INFINITY;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > largestVal) {
+      secondLargestVal = largestVal;
+      largestVal = arr[i];
+    }
+
+    if (arr[i] > secondLargestVal && arr[i] < largestVal) {
+      secondLargestVal = arr[i];
+    }
+  }
+
+  return secondLargestVal;
+};
+
+console.log(getSecondLargestOptimised([1, 2, 4, 5, 6, 9]));
+
+// 17 Form words from given arry string elements
+
+const formWord = function (arr) {
+  const letterCountObj = {};
+  const letterToFollow = {};
+
+  arr.forEach((el) => {
+    const [from, to] = el.split("-");
+    letterToFollow[from] = to;
+
+    if (letterCountObj[from] !== undefined) {
+      letterCountObj[from]++;
+    } else {
+      letterCountObj[from] = 1;
+    }
+
+    if (letterCountObj[to] !== undefined) {
+      letterCountObj[to]++;
+    } else {
+      letterCountObj[to] = 1;
+    }
+  });
+
+  const findStartLetter = function () {
+    let temparr = [];
+    let startingLetter = "";
+    for (let key in letterCountObj) {
+      if (letterCountObj[key] < 2) {
+        temparr.push(key);
+      }
+    }
+
+    arr.forEach((ele, idx) => {
+      if (ele.startsWith(temparr[0])) {
+        startingLetter = temparr[0];
+      }
+      if (ele.startsWith(temparr[1])) {
+        startingLetter = temparr[1];
+      }
+    });
+    console.log("Starging Letter", startingLetter);
+    return startingLetter;
+  };
+
+  let wordStartsWith = findStartLetter();
+  const wordLength = Object.keys(letterCountObj).length;
+
+  let count = 0;
+  let nextLetter = wordStartsWith;
+  let word = wordStartsWith;
+  while (count <= wordLength) {
+    if (letterToFollow[nextLetter]) {
+      word = word + letterToFollow[nextLetter];
+      nextLetter = letterToFollow[nextLetter];
+    }
+    count++;
+  }
+  console.log(word);
+  return word;
+};
+
+//Switzerland
+const getWord = formWord([
+  "S-W",
+  "W-I",
+  "I-T",
+  "T-Z",
+  "Z-E",
+  "E-R",
+  "R-L",
+  "L-A",
+  "A-N",
+  "N-D",
+]);
+console.log("getWord");
+
+// 18. Remove duplicate elements in sorted array in place of array and count unique elements length
+// input [1,1,2] -> 2, [1,2,_]
+// input [0,0,1,1,1,2,2,3,4] -> 5, [0,1,2,3,4,_,_,_,_]
+
+const removeDuplicateEle = function (arr) {
+  console.log("Get Unique elements length");
+  let i = 0;
+  for (let j = 1; j < arr.length; j++) {
+    if (arr[i] !== arr[j]) {
+      i++;
+      arr[i] = arr[j];
+    } else {
+      //arr[j] = "_";
+    }
+  }
+  console.log(i + 1, arr);
+};
+
+removeDuplicateEle([0, 0, 1, 1, 1, 2, 2, 3, 4]);
+
+// other approach
+
+const removeDuplicateEle1 = function (arr) {
+  console.log("Get Unique elements length approach1");
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] === arr[i + 1]) {
+      arr.splice(i + 1, 1);
+      i--;
+    }
+  }
+  console.log(arr);
+};
+
+removeDuplicateEle1([0, 1, 2, 3, 4]);
+
 //===========================================// Polifill and=================================================================================
 
 const newObj = {
@@ -351,7 +500,6 @@ const myObj = {
 Function.prototype.myCallMethod = function (context = {}, ...args) {
   if (typeof this !== "function") throw new Error(" This is not a function");
   context.fn = this;
-  console.log(this);
   context.fn(...args);
 };
 
@@ -409,7 +557,7 @@ const multiply = keyArray.myReduce((acc, curr) => {
 }, 5);
 console.log(multiply);
 // Callback to Promise and async & await
-console.log("******************Start Callback************************");
+//console.log("******************Start Callback************************");
 /*
   console.log("Start");
   
@@ -455,7 +603,7 @@ console.log("******************Start Callback************************");
   console.log("Stop");
   */
 
-console.log("Start Promises");
+//console.log("Start Promises");
 
 function showImportantMessage(message) {
   return new Promise((resolve, reject) => {
@@ -600,10 +748,10 @@ const fnWithdebounce = debounce(() => {
   console.log("I am under debounce");
 }, 1000);
 
-console.log(fnWithdebounce());
-console.log(fnWithdebounce());
-console.log(fnWithdebounce());
-console.log(fnWithdebounce());
+// console.log(fnWithdebounce());
+// console.log(fnWithdebounce());
+// console.log(fnWithdebounce());
+// console.log(fnWithdebounce());
 
 // Throttle
 
