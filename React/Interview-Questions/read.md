@@ -45,7 +45,12 @@ export default App;
 
 In React, Props (Properties) is a way of passing data to child component from a Parent component. Props are read-only, immutable, data can be any type like primitive data types Numbers, Boolean, String, JS objects, even functions.
 
+Props are short for Properties. It is a React built-in object that stores the value of attributes of a tag and works similarly to HTML attributes.
+
 Props are immutable, child component can't modify the props they recieve from parent.This helps unidirectional data flow in React applications.
+
+Note:
+Props provide a way to pass data from one component to another component. Props are passed to the component in the same way as arguments are passed in a function.
 
 ### 4. What is State in React?
 
@@ -115,4 +120,17 @@ This batching process ensures that updates are performed in an optimized manner,
 
 **Rendering to the Actual DOM:**
 Once the differences between the new and previous Virtual DOMs are determined, React applies the necessary changes to the actual DOM using efficient DOM manipulation techniques.
+
 React's rendering process is optimized for performance, ensuring that updates are applied in a timely manner and without causing unnecessary layout thrashing or reflows.
+
+### 7. What are synthetic events in React?
+Synthetic events combine the response of different browser's native events into one API, ensuring that the events are consistent across different browsers.
+
+The application is consistent regardless of the browser it is running in. Here, preventDefault, stopPropagation, is a synthetic event. except the events work identically across all browsers.
+
+### 8. What is a higher-order component in React?
+
+In React, a higher-order component is a function that takes a component as an argument and returns a new component that wraps the original component.
+
+A higher-order component acts as a container for other components. This helps to keep components simple and enables re-usability. They are generally used when multiple components have to use a common logic. 
+
