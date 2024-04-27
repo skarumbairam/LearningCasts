@@ -34,6 +34,21 @@ console.log(a);
 
 // 2. Polindrom
 
+const twoPointerApproachPolindrom = (str) => {
+  let leftPointer = 0;
+  let rightPointer = str.length - 1;
+  let flag = true;
+  while (leftPointer < rightPointer && flag) {
+    if (str[leftPointer] === str[rightPointer]) {
+      leftPointer++;
+      rightPointer--;
+    } else {
+      flag = false;
+    }
+  }
+  console.log("flag ----", flag);
+};
+
 const isPalindrom = function (str) {
   console.log("check Palindrom");
   const strArr = str.split("");
@@ -168,7 +183,7 @@ console.log(comparission);
 // Write a function sumZero which accepts a sorted array of integers . The funtion should find the first pair where the sum 0.
 // [-1, -2, -3, -4, 0, 3, 4, 5, 6]
 
-const findePairSum = function (arr, target) {
+const findPairSum = function (arr, target) {
   console.log("Find Pair sum and target");
   for (i = 0; i < arr.length; i++) {
     for (j = i + 1; j < arr.length; j++) {
@@ -181,7 +196,30 @@ const findePairSum = function (arr, target) {
   }
 };
 
-findePairSum([-1, -2, -3, -4, 0, 3, 4, 5, 6], 9);
+const findPairSum1 = function (arr, target) {
+  let leftPointer = 0;
+  let rightPointer = arr.length - 1;
+
+  while (leftPointer < rightPointer) {
+    const tempSum = arr[leftPointer] + arr[rightPointer];
+
+    if (tempSum === target) {
+      console.log(arr[leftPointer], arr[rightPointer]);
+      return;
+    }
+
+    if (tempSum < target) {
+      leftPointer++;
+    } else if (tempSum > target) {
+      rightPointer--;
+    } else {
+      console.log("No elements found");
+      return;
+    }
+  }
+};
+
+findPairSum([-1, -2, -3, -4, 0, 3, 4, 5, 6], 9);
 
 // 11. Find Maxsubarray for larger sum
 // input -> [-2, 1, -3, 4, -1, 2, 1, -5, 4]; -> 6 [4,-1,2,1]
@@ -495,7 +533,9 @@ const myObj = {
   name: "Siva",
 };
 
-// result.apply(newObn, [a1,a2,a3])
+newObj.result(myObj, "hello", "sadas");
+
+// newObj.result.apply(myObj, [a1,a2,a3])
 
 Function.prototype.myCallMethod = function (context = {}, ...args) {
   if (typeof this !== "function") throw new Error(" This is not a function");
@@ -552,10 +592,27 @@ Array.prototype.myReduce = function (cb, intialValue) {
   return acc;
 };
 
+//[1, 2, 3].myConcat([4, 5, 6]); [1, 2, 3].myConcat(4, 5, 6); [1, 2, 3].myConcat(4, [5, 6]);
+Array.prototype.myConcat = function (...items) {
+  const newArray = [...this];
+  for (let i = 0; i < items.length; i++) {
+    if (Array.isArray(items[i])) {
+      newArray.push(...items[i]);
+    } else {
+      newArray.push(items[i]);
+    }
+  }
+  console.log(newArray);
+};
+
+[1, 2, 3].myConcat([4, 5, 6]);
+
 const multiply = keyArray.myReduce((acc, curr) => {
   return curr + acc;
 }, 5);
+
 console.log(multiply);
+
 // Callback to Promise and async & await
 //console.log("******************Start Callback************************");
 /*

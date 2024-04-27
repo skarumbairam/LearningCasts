@@ -197,7 +197,7 @@ showImportantMessage("Code.io")
 //Promise.all -> return as a promise the result or response is all resolved promise's value as an Array, if any one of prmomises failed return the value of rejection reason only never goes to then block
 //Promise.allSettled -> return as a promise, the response is resolved promised status (fulfill, reject) as a object like status and value for all promises in single an Array,
 // Promise.any -> wait for all promises to resolve and look for atlease one success if yes returns the success promisev value else returns all failed reasons as an array
-// Promise.race -> returns first promise whihc is resolved or rejected value or reason respectively
+// Promise.race -> returns first promise which is resolved or rejected value or reason respectively
 
 /*
 Promise.all([
