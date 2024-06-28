@@ -5,7 +5,7 @@ const isAnagram = function (str1, str2) {
   const a = str1.toLowerCase().replace(/[^\w]/g, "");
   const b = str2.toLowerCase().replace(/[^\w]/g, "");
 
-  if (a.length !== a.length) return false;
+  if (a.length !== b.length) return false;
 
   const obj1 = helperString(a);
   const obj2 = helperString(b);
@@ -65,6 +65,7 @@ console.log(b);
 
 // 3. Pangram
 
+
 const isPangram = function (str) {
   console.log("check Pangram");
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -87,9 +88,9 @@ const reverseNumber = function (num) {
   console.log("Reverse Number", num);
   const sign = Math.sign(num);
   const strNum = num.toString();
-  const revetsNum = parseInt(strNum.split("").reverse().join(""));
+  const reversNum = parseInt(strNum.split("").reverse().join(""));
 
-  return sign * revetsNum;
+  return sign * reversNum;
 };
 
 const reverseNum = reverseNumber(-23400);
@@ -358,17 +359,20 @@ function objectRecurssive() {
 
   function callObj(obj, parent) {
     for (const key in obj) {
-      if (typeof obj[key] === "object") {
-        callObj(obj[key], `${parent}_${key}`);
-      } else {
-        resultObj[`${parent}_${obj[key]}`] = obj[key];
-      }
+    const newParent = parent + key; // if parent need to add here parent+'_'+key
+    if (typeof obj[key] === "object") {
+      callObj(obj[key], newParent+'_');
+    } else {
+      resultObj[newParent] = obj[key];
     }
   }
 
-  callObj(user, "user"); //user_name: senthilkumarr, user_name_details_family_wife:Hema,
+  callObj(user, ""); //user_name: senthilkumarr, user_name_details_family_wife:Hema,
   console.log(resultObj);
 }
+
+
+
 
 // 16 Get second largest value from array
 
@@ -546,7 +550,7 @@ Function.prototype.myCallMethod = function (context = {}, ...args) {
 Function.prototype.myApplyMethod = function (context = {}, arg = []) {
   if (typeof this !== "function") throw new Error(" This is not a function");
   if (!Array.isArray(arg))
-    throw new Error("List of args are not a iteratble objec");
+    throw new Error("Args are not a iteratble objec");
   context.fn = this;
   context.fn(...arg);
 };
@@ -788,6 +792,42 @@ Promise.myAll([p1, p2, p3])
     console.log(res);
   })
   .catch((e) => console.log(e));
+
+
+  // Other Approach
+  const dummyAPI = (time) => {
+    return new \( (resolve, reject) => {
+        setTimeout( ()=> {
+            const data = 'Resolved with this time' + time;
+            resolve(data);
+        }, time)
+    })
+}
+
+const promiseTask = [dummyAPI(1000), dummyAPI(2000), dummyAPI(3000)];
+
+Promise.promisePolifill = (promiseTask) => {
+   
+    return new Promise( (resolve, reject) => {
+         const result = [];
+        promiseTask.forEach( (promise, index) => {
+            promise.then( (data) => {
+                result[index] = data;
+                if(index === promiseTask.length-1) resolve(result);
+            }).catch( (err) => {
+                reject(err);
+            })
+        }) 
+    })
+    
+}
+Promise.all(promiseTask).then( (data) => {
+    console.log("Success"+data)
+}).catch( (err) => {
+    console.log("Error"+err)
+})
+
+// ===========================
 
 //  Debounce concept
 
