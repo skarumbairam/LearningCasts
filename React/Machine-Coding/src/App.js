@@ -1,13 +1,22 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./components/HomePage";
-export const UserNameContext = React.createContext("Senthil");
+import Header from "./components/Header";
+import Home from "./components/Home";
+import About from "./components/About";
+import Blog from "./components/Blog";
 
 function App() {
   return (
-    <UserNameContext.Provider value="Senthil new">
-      <HomePage />
-    </UserNameContext.Provider>
+    <>
+      <Header />
+      <div className="container mx-auto">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 

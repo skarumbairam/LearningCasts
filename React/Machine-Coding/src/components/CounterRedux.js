@@ -1,38 +1,33 @@
-import {
-  increament,
-  decreament,
-  increamentByAmount,
-} from "../store/counterSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { useRef } from "react";
 const CounterRedux = () => {
-  const dispatch = useDispatch();
-  const stateCount = useSelector((store) => store.counter.count);
-  const inputRef = useRef(null);
-  const increament = () => {
-    dispatch(increament());
-  };
-
-  const decreament = () => {
-    dispatch(decreament());
-  };
-
-  const byAmount = () => {
-    const val = Number(inputRef.current.value);
-    console.log(typeof val);
-    dispatch(increamentByAmount(val));
-    inputRef.current.value = "";
-  };
+  const increament = () => {};
+  const decreament = () => {};
 
   return (
     <div>
-      <input type="number" ref={inputRef} />
-      <button onClick={byAmount}>
-        Submit and Increament or Decrement by Value
-      </button>
-      <button onClick={increament}>+</button>
-      {stateCount}
-      <button onClick={decreament}>-</button>
+      <h2 className="text-xl leading-10">
+        3. Counter ( With Redux Store ) TBD{" "}
+      </h2>
+      <p>
+        This component has been created using Redux Store and managing the state
+        in store
+      </p>
+
+      <div className="text-center border-red-400 border mt-4">
+        <button
+          className="bg-slate-200 p-3 rounded-lg m-2"
+          onClick={decreament}
+        >
+          Decreament
+        </button>
+        <p>{0}</p>
+
+        <button
+          className="bg-slate-200 p-3 rounded-lg m-2"
+          onClick={increament}
+        >
+          Increament
+        </button>
+      </div>
     </div>
   );
 };
