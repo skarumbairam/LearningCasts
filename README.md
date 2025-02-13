@@ -388,7 +388,7 @@ Macrotask Queue: Timers and other lower-priority tasks are queued and executed a
 
 ![1721185522661](https://github.com/user-attachments/assets/fe7819d6-42a8-42b9-ac38-3bd46dbbd5c3)
 
-## What is Debouncing & Throtling? 
+## What is Debouncing & Throttling? 
 
 Both are techniques to stop unnecessary API calls which will put a lot of pressure on the server
 
