@@ -120,7 +120,60 @@ Function expressions are not hoisted. The function definition is only available 
 **Arrow Functions**
 An arrow function is a concise syntax for writing function expressions. It behaves similarly to function expressions in terms of hoisting and definition.
 
+## What is the callback?
 
+As we know, functions are first-class citizens in JavaScript, which means that functions can be assigned to variables, passed as arguments (parameters) to other functions, and returned from other functions. This feature is unique to JavaScript (and a few other languages), which is why functions are considered first-class citizens.
 
+A callback function is a function that is passed as an argument to another function. The callback function is then invoked at a later point in time, often after some kind of event or operation has been completed. This is what makes it a callback.
 
+```
+function greeting(name, callback) {
+  console.log("Hello, " + name);
+  callback();  // The callback function is called here
+}
+
+function goodbye() {
+  console.log("Goodbye!");
+}
+
+// Pass the 'goodbye' function as a callback to 'greeting'
+greeting("Alice", goodbye);
+
+```
+
+## What is callback hell?
+
+Callback hell (also known as Pyramid of Doom) is a term used to describe the situation in JavaScript where callbacks are nested within other callbacks, creating code that becomes deeply indented and hard to read, understand, and maintain. This usually happens when multiple asynchronous operations, like reading files, making API requests, or handling events, are chained together using callbacks.
+
+```
+doSomething(function(err, result) {
+  if (err) {
+    console.log("Error:", err);
+  } else {
+    doSomethingElse(result, function(err, result2) {
+      if (err) {
+        console.log("Error:", err);
+      } else {
+        doYetAnotherThing(result2, function(err, result3) {
+          if (err) {
+            console.log("Error:", err);
+          } else {
+            // Continue processing
+            console.log("Final Result:", result3);
+          }
+        });
+      }
+    });
+  }
+});
+```
+
+**Why does Callback Hell happen?**
+When you have multiple asynchronous tasks that depend on one another, you often need to pass callbacks to handle the results of each task.
+As each callback may also require another callback (for the next step in the process), the code can become deeply nested and harder to manage.
+
+**Why is Callback Hell a Problem?**
+Readability: As the number of nested callbacks increases, the code becomes harder to read and understand.
+Maintainability: Adding more functionality can lead to more deeply nested callbacks, which makes future changes difficult and error-prone.
+Error Handling: Handling errors in deeply nested callbacks can be tricky and lead to repetitive code.
 
