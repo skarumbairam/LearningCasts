@@ -188,7 +188,15 @@ greeting("Alice", goodbye);
 
 Callback hell (also known as Pyramid of Doom) is a term used to describe the situation in JavaScript where callbacks are nested within other callbacks, creating code that becomes deeply indented and hard to read, understand, and maintain. This usually happens when multiple asynchronous operations, like reading files, making API requests, or handling events, are chained together using callbacks.
 
+Below is example for nested callback,  callback hell, inversion of control
+ * createOrder
+ * proceedPayment
+ * orderSummery
+ * updateWallet
+ * Managing code is hard, pyramid of Doom, creating callback hell, and also losing control of code which raises inversion control
+
 ```
+
 doSomething(function(err, result) {
   if (err) {
     console.log("Error:", err);
