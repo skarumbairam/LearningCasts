@@ -455,5 +455,136 @@ throttlingCall();
 throttlingCall();
 ```
 
+## What is about call(), apply(), bind () ?
 
+In JavaScript, call(), apply(), and bind() are methods used to invoke functions with a specified **this** value and **arguments**. **These methods are particularly useful when working with context and function borrowing**. They allow you to set the value of this in different contexts and pass arguments to a function dynamically.
 
+**call()** is used to invoke a function with a specific **this** value and **arguments** passed individually (comma separated values ).
+It immediately calls the function with the given this value and arguments.
+
+**apply()** is very similar to call(), but instead of passing the arguments individually, you pass them as an array or array-like object. It is useful when you don’t know the exact number of arguments to pass.
+
+**bind()** is different from call() and apply() because it does not immediately invoke the function. Instead, it returns a new function with the specified **this** value and any pre-set arguments. This new function can be invoked later. It is particularly useful when you need to ensure a function retains a specific this value, even when it's executed in a different context.
+
+```
+function fullname(homeTwon, state) {
+  console.log(
+    this.firstName,
+    " ",
+    this.lastName,
+    "From",
+    homeTwon,
+    "And State is",
+    state
+  );
+}
+
+const obj1 = {
+  firstName: "Senthilkumar",
+  lastName: "Karumbairam",
+};
+
+const obj2 = {
+  firstName: "Sivakumar",
+  lastName: "Karumbairam",
+};
+
+const obj3 = {
+  firstName: "Suresh",
+  lastName: "Karumbairam",
+};
+
+fullname.call(obj1, "Ariyalur", "Tamilnadu");
+// apply
+fullname.apply(obj2, ["Trichy", "Tamilnadu"]);
+// bind
+const callFullname = fullname.bind(obj3, "Pollachi", "Tamilnadu");
+callFullname();
+
+```
+## call(), apply(), bind() Polifils?
+
+```
+Function.prototype.myCall = function (obj = {}, ...args) {
+  if (typeof this !== "function") {
+    throw new Error("Function is not Callable");
+  }
+  console.log("Custom Call Method");
+  obj.fn = this;
+  obj.fn(...args);
+};
+
+Function.prototype.myApply = function (obj = {}, args = []) {
+  if (typeof this !== "function") {
+    throw new Error("Function is not Callable");
+  }
+
+  if (!Array.isArray(args)) {
+    throw new Error("Arguments are not iteratable");
+  }
+
+  console.log("Custom Apply Method");
+  obj.fn = this;
+  obj.fn(...args);
+};
+
+Function.prototype.myBind = function (obj = {}, ...args) {
+  if (typeof this !== "function") {
+    throw new Error("Function is not Callable");
+  }
+  obj.fn = this;
+  return function (...newArgs) {
+    console.log("Custom Bind Method");
+    return obj.fn(...args, ...newArgs);
+  };
+};
+
+fullname.myCall(obj1, "Ariyalur", "Tamilnadu");
+fullname.myApply(obj1, ["Ariyalur", "Tamilnadu"]);
+const myBind1 = fullname.myBind(obj1, "Ariyalur");
+myBind1("India");
+
+```
+
+## Polifils for map, filter, reduce arry methods.
+
+```
+Array.prototype.myMap = function (cb) {
+  let tempResult = [];
+  for (let i = 0; i < this.length; i++) {
+    tempResult.push(cb(this[i], i, this));
+  }
+  return tempResult;
+};
+
+const testArray = [4, 5, 7];
+const result = testArray.myMap((el, idx) => el * 5);
+
+Array.prototype.myFilter = function (cb) {
+  let tempResult = [];
+  for (let i = 0; i < this.length; i++) {
+    if (cb(this[i], i, this)) {
+      tempResult.push(this[i]);
+    }
+  }
+  return tempResult;
+};
+
+const resultFilter = testArray.myFilter((el, idx) => el > 4);
+
+Array.prototype.myReduce = function (cb, intialValue) {
+  let accum = intialValue;
+
+  for (let i = 0; i < this.length; i++) {
+    accum = accum ? cb(accum, this[i], i, this) : this[0];
+  }
+
+  return accum;
+};
+
+const testArray1 = [4, 5, 7];
+const result3 = testArray1.myReduce((acc, ele, id, arr) => {
+  return acc + ele;
+}, 0);
+
+```
