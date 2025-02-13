@@ -502,7 +502,7 @@ const callFullname = fullname.bind(obj3, "Pollachi", "Tamilnadu");
 callFullname();
 
 ```
-## call(), apply(), bind() Polifils?
+## Polifils of Function call, call(), apply(), bind()
 
 ```
 Function.prototype.myCall = function (obj = {}, ...args) {
@@ -546,7 +546,7 @@ myBind1("India");
 
 ```
 
-## Polifils for map, filter, reduce arry methods.
+## Polifils of map(), filter(), reduce() Array methods.
 
 ```
 Array.prototype.myMap = function (cb) {
