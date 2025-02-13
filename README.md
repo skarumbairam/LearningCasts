@@ -261,6 +261,95 @@ executeOperation();
 
 ```
 
+## What are promise APIs?
+ 
+**Promise.all()** is used to execute multiple promises in parallel and wait for all of them to settle (either resolve or reject).
+
+It takes an array of promises as an argument and returns a single promise that resolves when all promises in the array have resolved, or rejects if any one of them fails.
+
+The result of Promise.all() is an array of results from all the promises, in the same order as the input array.
+
+If any of the promises reject, Promise.all() immediately rejects with the reason of the first rejected promise, without waiting for other promises to settle.
+
+**Key Points:**
+All promises must resolve for the result to be returned.
+
+If any promise rejects, the returned promise rejects immediately, and the error is thrown as the rejection value.
+
+```
+function resolveAfter(time, value) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(value), time);
+  });
+}
+
+function rejectAfter(time, reason) {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject(reason), time);
+  });
+}
+
+// Creating some promises to resolve and reject
+const promise1 = resolveAfter(1000, 'v1');
+const promise2 = resolveAfter(2000, 'v2');
+const promise3 = rejectAfter(1500, 'Error in promise 3');
+const promise4 = resolveAfter(3000, 'v4');
+
+// Using Promise.all
+Promise.all([promise1, promise2, promise3, promise4])
+  .then((results) => {
+    console.log("All promises resolved:", results);  // This won't run if any promise is rejected
+  })
+  .catch((error) => {
+    console.log("Promise rejected with error:", error);  // This will run if any promise fails
+  });
+
+Note:
+In this example, promise3 rejects after 1.5 seconds, so Promise.all() will immediately reject, and the remaining promises (promise1, promise2, promise4) are not waited for.
+```
+
+**Promise.allSettled()** is a method that waits for all promises to settle, regardless of whether they resolve (succeed) or reject (fail). Unlike Promise.all(), which rejects immediately if any promise fails, Promise.allSettled() ensures that all promises complete and provides an array of results, indicating whether each promise was resolved or rejected.
+
+```
+
+function resolveAfter(time, value) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(value), time);
+  });
+}
+
+function rejectAfter(time, reason) {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject(reason), time);
+  });
+}
+
+// Creating some promises to resolve and reject
+const promise1 = resolveAfter(1000, 'v1');
+const promise2 = resolveAfter(2000, 'v2');
+const promise3 = rejectAfter(1500, 'Error in promise 3');
+const promise4 = resolveAfter(3000, 'v4');
+
+// Using Promise.allSettled
+Promise.allSettled([promise1, promise2, promise3, promise4])
+  .then((results) => {
+    console.log("All promises settled:", results);
+  });
+
+//====Output 
+All promises settled: [
+  { status: "fulfilled", value: "v1" },
+  { status: "fulfilled", value: "v2" },
+  { status: "rejected", reason: "Error in promise 3" },
+  { status: "fulfilled", value: "v4" }
+]
+```
+
+**Promise.race()** is a method that waits for the first promise to settle (either fulfill or reject). As soon as one of the promises settles (either resolves or rejects), Promise.race() immediately settles with the result of that first settled promise. The remaining promises are ignored once the first one has settled.
+
+**Promise.any()** is wait for the first settled promise with a successful value. If all promises are rejected, it returns an aggregated error.
+
+
 ## What is event loop in javascript?
 
 JavaScript is a fascinating single-threaded, non-blocking, asynchronous, and concurrent language. If this sounds complex, don't worry! Let's break it down into simple terms by exploring the Event Loop, Call Stack, Microtask Queue, and Macrotask Queue.
