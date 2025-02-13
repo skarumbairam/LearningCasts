@@ -177,3 +177,43 @@ Readability: As the number of nested callbacks increases, the code becomes harde
 Maintainability: Adding more functionality can lead to more deeply nested callbacks, which makes future changes difficult and error-prone.
 Error Handling: Handling errors in deeply nested callbacks can be tricky and lead to repetitive code.
 
+## What is Promise?
+
+A Promise is a JavaScript object that represents the eventual completion or failure of an asynchronous operation (such as I/O operations). A Promise can be in one of three states: pending, fulfilled, or rejected.
+
+A Promise is created using the new Promise() constructor, which accepts a function called the executor. This function takes two parameters: resolve and reject. The resolve function is called when the asynchronous operation succeeds, while the reject function is called when it fails.
+
+```
+// Creating a Promise
+let myPromise = new Promise(function(resolve, reject) {
+  let success = true; // Change this to false to simulate failure
+  
+  if (success) {
+    resolve("The operation was successful!");
+  } else {
+    reject("The operation failed.");
+  }
+});
+
+// Consuming the Promise
+myPromise
+  .then(function(result) {
+    console.log(result); // This will be called if the promise is resolved
+  })
+  .catch(function(error) {
+    console.log(error); // This will be called if the promise is rejected
+  });
+
+// Using async/await to consume the Promise
+async function executeOperation() {
+  try {
+    let result = await myPromise; // Await the Promise
+    console.log(result); // This will be called if the promise is resolved
+  } catch (error) {
+    console.log(error); // This will be called if the promise is rejected
+  }
+}
+
+executeOperation();
+
+```
