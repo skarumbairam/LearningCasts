@@ -588,3 +588,37 @@ const result3 = testArray1.myReduce((acc, ele, id, arr) => {
 }, 0);
 
 ```
+
+## What is Event Delegation? 
+
+Event delegation in JavaScript is a technique where you attach a single event listener to a parent element instead of adding individual event listeners to each child element. This technique is particularly useful for handling events on dynamically created or future elements, as well as for improving performance when dealing with a large number of child elements.
+
+**Advantages:**
+
+Efficient memory usage: Rather than attaching an event listener to every individual child element, only one listener is attached to the parent, which saves memory and reduces overhead.
+
+Works with dynamic elements: If new child elements are added to the DOM after the initial page load (e.g., via JavaScript), they will still trigger the event because the listener is on the parent element, not the child.
+
+Improved performance: It reduces the number of event listeners attached to elements, which can improve performance, especially with many elements.
+```
+// HTML
+<ul id="parent">
+  <li class="child">Item 1</li>
+  <li class="child">Item 2</li>
+  <li class="child">Item 3</li>
+</ul>
+
+//JS
+// Select the parent element
+const parent = document.getElementById('parent');
+
+// Attach a single event listener to the parent element
+parent.addEventListener('click', function(event) {
+  // Check if the clicked element is a child <li> element
+  if (event.target && event.target.matches('li.child')) {
+    console.log('Item clicked:', event.target.textContent);
+  }
+});
+```
+
+
