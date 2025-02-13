@@ -120,6 +120,49 @@ Function expressions are not hoisted. The function definition is only available 
 **Arrow Functions**
 An arrow function is a concise syntax for writing function expressions. It behaves similarly to function expressions in terms of hoisting and definition.
 
+**HOCs Functions**
+
+In JavaScript, Higher-Order Functions (HOCs) are functions that either:
+
+Accept one or more functions as arguments, or Return a function as their result.
+The idea behind HOCs is that they allow you to create more flexible and reusable functions by taking advantage of the ability to pass and return functions.
+
+Accepting functions as arguments: HOCs can take one or more functions as input.
+Returning a function: HOCs can return a new function, possibly with enhanced functionality.
+
+Array methods like map, filter, and reduce are built-in higher-order functions because they take a callback function as an argument.
+
+**Advantage:**
+
+**Reusability**: HOCs make code more reusable by abstracting common behavior.
+
+**Abstraction**: You can define generic functions that can be customized by passing in different callback functions.
+
+**Modularity**: They help in breaking down complex logic into simpler, smaller units, making the code easier to maintain.
+
+
+```
+function withLogging(func) {
+  return function(...args) {
+    console.log('Function called with arguments:', args);
+    const result = func(...args);
+    console.log('Function result:', result);
+    return result;
+  };
+}
+
+function add(a, b) {
+  return a + b;
+}
+
+const addWithLogging = withLogging(add);
+addWithLogging(2, 3);
+
+// Output: Function called with arguments: [2, 3]
+// Output: Function result: 5
+
+```
+
 ## What is the callback?
 
 As we know, functions are first-class citizens in JavaScript, which means that functions can be assigned to variables, passed as arguments (parameters) to other functions, and returned from other functions. This feature is unique to JavaScript (and a few other languages), which is why functions are considered first-class citizens.
