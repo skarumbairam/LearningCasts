@@ -388,4 +388,64 @@ Macrotask Queue: Timers and other lower-priority tasks are queued and executed a
 
 ![1721185522661](https://github.com/user-attachments/assets/fe7819d6-42a8-42b9-ac38-3bd46dbbd5c3)
 
+## What is Debouncing & Throtling? 
+
+Both are techniques to stop unnecessary API calls which will put a lot of pressure on the server
+
+**Debouncing:**
+On the Flipkart eCommerce website, when you type a product name like 'Notebook', a small delay of approximately 300ms is introduced between each keystroke before making the API call for suggestions. This prevents API calls for every individual keystroke and instead sends a request after the user has stopped typing for a brief moment.
+
+Debouncing waits for a pause in activity before triggering an action.
+
+**Throttling:**
+On the Flipkart eCommerce website, when scrolling through the product listings, a request is sent to load more products at a fixed interval of 300ms. Even if the user scrolls continuously, the API call is made only once every 300ms, preventing excessive API calls during fast scrolling.
+
+Throttling ensures the action is performed at regular intervals, regardless of how many times the event is triggered.
+
+```
+const debounce = (callback, del) => {
+  let timer;
+  return function (...args) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback(...args);
+    }, del);
+  };
+};
+
+function callMe() {
+  console.log("Call Me");
+}
+
+const debounceCallme = debounce(callMe, 2000);
+debounceCallme();
+debounceCallme();
+debounceCallme();
+debounceCallme();
+
+
+const throttling = function (cb, dl) {
+  let lastTrigger = 0;
+  return function () {
+    const currTime = Date.now();
+
+    if (currTime - lastTrigger < dl) return;
+    lastTrigger = currTime;
+    return cb();
+  };
+};
+
+const throttlingCall = throttling(callMeThrotle, 10);
+
+function callMeThrotle() {
+  console.log("callMeThrotle");
+}
+
+throttlingCall();
+throttlingCall();
+throttlingCall();
+throttlingCall();
+```
+
+
 
