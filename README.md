@@ -390,7 +390,7 @@ Macrotask Queue: Timers and other lower-priority tasks are queued and executed a
 
 ## What is Debouncing & Throttling? 
 
-Both are techniques to stop unnecessary API calls which will put a lot of pressure on the server
+Both are techniques to stop unnecessary API calls which will put a lot of pressure on the server (idea is to limit the frequency of function execution).
 
 **Debouncing:**
 On the Flipkart eCommerce website, when you type a product name like 'Notebook', a small delay of approximately 300ms is introduced between each keystroke before making the API call for suggestions. This prevents API calls for every individual keystroke and instead sends a request after the user has stopped typing for a brief moment.
