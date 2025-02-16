@@ -621,4 +621,10 @@ parent.addEventListener('click', function(event) {
 });
 ```
 
+## Describe the async and defer attributes in the script tag.
+
+![wfL82](https://github.com/user-attachments/assets/ce94cf85-bd7d-4adc-b7af-5ee3d1b39879)
+
+
+
 
