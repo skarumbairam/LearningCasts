@@ -1,6 +1,6 @@
 # ================ REACT JS ================
 
-## what is react js & What are the key features of React?
+## What is react js & What are the key features of React?
 
 React is an open-source JavaScript library primarily used for building single-page applications (SPAs) and reusable user interface (UI) components. It was developed by Facebook and is maintained by Facebook and a community of developers.
 
