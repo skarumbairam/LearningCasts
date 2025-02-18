@@ -1,4 +1,4 @@
-# SOLID PRINCIPLE & DESIGN PATTERS 
+# SOLID PRINCIPLE & DESIGN PATTERNS 
 
 ## What are SOLID Principles?
 
@@ -339,3 +339,214 @@ userService.getUser();
 
 Now, UserService depends on the Database abstraction, not a specific database implementation.
 ```
+SRP: One class, one responsibility ✅
+
+OCP: Extend without modifying existing code ✅
+
+LSP: Subclasses should behave as expected ✅
+
+ISP: Don't force classes to implement unnecessary methods ✅
+
+DIP: Depend on abstractions, not concrete classes ✅
+
+## What are DESIGN Patterns?
+Design patterns are reusable solutions to common problems in software design. They help improve code structure, maintainability, and scalability.
+
+### Categories of Design Patterns
+1. Creational Patterns → Object creation strategies.
+
+2. Structural Patterns → Composition of objects and classes.
+
+3. Behavioral Patterns → Communication between objects.
+
+
+| Pattern | Category |  Use Case|
+| -------- | --------- | --------------|
+| Factory | Creational| Object creation|
+| Abstract Factory | Creational| Creating related objects |
+| Prototype | Creational | Object cloning |
+| Singleton | Creational | Global instances (e.g., database) |
+| Builder | Creational | Step-by-step object creation |
+| | |
+| Adapter | Structural | Making incompatible interfaces work |
+| Proxy | Structural | Controlling access (e.g., caching) |
+| Flyweight | Structural | Memory optimization |
+| Bridge | Structural | Decoupling abstraction from implementation |
+| Decorator | Structural | Adding extra functionality dynamically |
+| Composite | Structural | lets you compose objects into tree structures and then work with these structures as if they were individual objects.|
+| Facade | Structural | provides a simplified interface to a library, a framework, or any other complex set of classes. |
+| | |
+| Chain of Responsibility | Behavioral |  |
+| Iterator | Behavioral | |
+| Memento | Behavioral | |
+| Template Method | Behavioral |  |
+| Visitor | Behavioral | 
+| Observer | Behavioral | Event-driven programming |
+| Strategy | Behavioral | Switching algorithms dynamically |
+| Command	 | Behavioral	| Encapsulating actions as objects |
+| Mediator	| Behavioral	| Centralized communication |
+| State	| Behavioral | Handling UI state changes
+
+## Creational Patterns & code examples
+
+Let's see some very often-used patterns deal with object creation efficiently.
+
+### Factory Pattern
+✔️ Used to create objects without specifying their exact class.
+
+```
+// Without Facotry
+
+class Car {
+  constructor(brand, model) {
+    this.brand = brand;
+    this.model = model;
+  }
+}
+
+const car1 = new Car("Toyota", "Corolla");
+const car2 = new Car("Honda", "Civic");
+
+// With Factory Pattern
+class CarFactory {
+  static createCar(brand, model) {
+    return new Car(brand, model);
+  }
+}
+
+const car1 = CarFactory.createCar("Toyota", "Corolla");
+const car2 = CarFactory.createCar("Honda", "Civic");
+
+//Centralized object creation logic.
+```
+
+### Abstract Factory Pattern
+✔️ Provides an interface for creating families of related objects without specifying their concrete classes.
+
+✔️ Difference from Factory: A Factory creates a single type of object, while an Abstract Factory creates multiple related objects.
+
+```
+class Car {
+  constructor(brand) {
+    this.brand = brand;
+  }
+
+  drive() {
+    console.log(`Driving a ${this.brand}`);
+  }
+}
+
+class Bike {
+  constructor(brand) {
+    this.brand = brand;
+  }
+
+  ride() {
+    console.log(`Riding a ${this.brand}`);
+  }
+}
+
+class VehicleFactory {
+  static createVehicle(type, brand) {
+    switch (type) {
+      case "car":
+        return new Car(brand);
+      case "bike":
+        return new Bike(brand);
+      default:
+        throw new Error("Unknown vehicle type");
+    }
+  }
+}
+
+// Usage
+const car = VehicleFactory.createVehicle("car", "Tesla");
+car.drive(); // ✅ Driving a Tesla
+
+const bike = VehicleFactory.createVehicle("bike", "Yamaha");
+bike.ride(); // ✅ Riding a Yamaha
+
+//Creating UI components for different platforms (e.g., Material UI for Android and Cupertino UI for iOS).
+
+```
+### Prototype Pattern
+✔️ Used to clone existing objects instead of creating new ones.
+
+```
+const carPrototype = {
+  drive() {
+    console.log(`Driving a ${this.brand}`);
+  },
+};
+
+const myCar = Object.create(carPrototype);
+myCar.brand = "Tesla";
+
+myCar.drive(); // ✅ Driving a Tesla
+
+//Performance optimization by cloning instead of instantiating.
+```
+### Singleton Pattern
+✔️ Ensures only one instance of a class exists.
+
+```
+class Singleton {
+  constructor() {
+    if (!Singleton.instance) {
+      Singleton.instance = this;
+    }
+    return Singleton.instance;
+  }
+}
+
+const instance1 = new Singleton();
+const instance2 = new Singleton();
+console.log(instance1 === instance2); // ✅ true (same instance)
+
+//Database connections, configuration settings.
+```
+### Builder Pattern
+✔️ Used for creating complex objects step by step.
+
+```
+class Car {
+  constructor() {
+    this.brand = "";
+    this.model = "";
+    this.color = "";
+  }
+}
+
+class CarBuilder {
+  constructor() {
+    this.car = new Car();
+  }
+
+  setBrand(brand) {
+    this.car.brand = brand;
+    return this;
+  }
+
+  setModel(model) {
+    this.car.model = model;
+    return this;
+  }
+
+  setColor(color) {
+    this.car.color = color;
+    return this;
+  }
+
+  build() {
+    return this.car;
+  }
+}
+
+const myCar = new CarBuilder().setBrand("Tesla").setModel("Model S").setColor("Red").build();
+console.log(myCar);
+
+//Simplifies object creation with many configurations.
+```
+
+## Structural Patterns & code examples
+
