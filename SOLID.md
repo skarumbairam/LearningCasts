@@ -550,3 +550,358 @@ console.log(myCar);
 
 ## Structural Patterns & code examples
 
+### Adapter Pattern
+Allows incompatible interfaces to work together.
+```
+class OldSystem {
+  request() {
+    return "Old system response";
+  }
+}
+
+class NewSystem {
+  newRequest() {
+    return "New system response";
+  }
+}
+
+class Adapter {
+  constructor(newSystem) {
+    this.newSystem = newSystem;
+  }
+
+  request() {
+    return this.newSystem.newRequest();
+  }
+}
+
+const adapter = new Adapter(new NewSystem());
+console.log(adapter.request()); // ✅ New system response
+
+```
+### Decorator Pattern
+Adds new functionality dynamically without modifying existing code.
+
+```
+class Coffee {
+  cost() {
+    return 5;
+  }
+}
+
+class MilkDecorator {
+  constructor(coffee) {
+    this.coffee = coffee;
+  }
+
+  cost() {
+    return this.coffee.cost() + 2;
+  }
+}
+
+const myCoffee = new MilkDecorator(new Coffee());
+console.log(myCoffee.cost()); // ✅ 7
+
+//Middleware functions in Express.js.
+```
+
+### Proxy Pattern
+Acts as a wrapper to control access to another object. Use case: Lazy initialization, security, caching.
+
+```
+class API {
+  fetchData() {
+    console.log("Fetching data from the API...");
+    return { data: "Real API Response" };
+  }
+}
+
+class APIProxy {
+  constructor() {
+    this.api = new API();
+    this.cache = null;
+  }
+
+  fetchData() {
+    if (!this.cache) {
+      this.cache = this.api.fetchData();
+    }
+    console.log("Returning cached data...");
+    return this.cache;
+  }
+}
+
+// Usage
+const proxy = new APIProxy();
+console.log(proxy.fetchData()); // ✅ Fetching from API
+console.log(proxy.fetchData()); // ✅ Returning cached data
+
+//Proxying API requests to reduce server load.
+```
+### Flyweight Pattern
+Reduces memory usage by sharing common object data instead of duplicating it. Use case: Handling a large number of similar objects efficiently (e.g., rendering thousands of UI elements).
+
+```
+class Character {
+  constructor(char) {
+    this.char = char;
+  }
+
+  render(font) {
+    console.log(`Rendering '${this.char}' in ${font} font.`);
+  }
+}
+
+class CharacterFactory {
+  constructor() {
+    this.characters = {};
+  }
+
+  getCharacter(char) {
+    if (!this.characters[char]) {
+      this.characters[char] = new Character(char);
+    }
+    return this.characters[char];
+  }
+}
+
+// Usage
+const factory = new CharacterFactory();
+const charA = factory.getCharacter("A");
+const charB = factory.getCharacter("B");
+const anotherCharA = factory.getCharacter("A");
+
+console.log(charA === anotherCharA); // ✅ true (same instance)
+charA.render("Arial");
+
+//Optimizing performance in games (reusing trees, enemies, etc.).
+```
+
+### Bridge Pattern
+Decouples abstraction from implementation to allow independent development. Implementing UI components that work with different APIs.
+
+```
+class Device {
+  turnOn() {
+    throw new Error("Method not implemented");
+  }
+}
+
+class TV extends Device {
+  turnOn() {
+    console.log("TV is turned ON");
+  }
+}
+
+class Remote {
+  constructor(device) {
+    this.device = device;
+  }
+
+  pressPowerButton() {
+    this.device.turnOn();
+  }
+}
+
+// Usage
+const tv = new TV();
+const remote = new Remote(tv);
+remote.pressPowerButton(); // ✅ TV is turned ON
+
+//Decoupling UI rendering from backend logic.
+```
+##  Behavioral Patterns (Communication Between Objects) & code examples
+
+### Mediator Pattern
+Centralizes communication between multiple objects. Use case: Chat applications where multiple users communicate via a centralized mediator (chat server).
+
+```
+class ChatRoom {
+  sendMessage(user, message) {
+    console.log(`${user.name}: ${message}`);
+  }
+}
+
+class User {
+  constructor(name, chatRoom) {
+    this.name = name;
+    this.chatRoom = chatRoom;
+  }
+
+  send(message) {
+    this.chatRoom.sendMessage(this, message);
+  }
+}
+
+// Usage
+const chatRoom = new ChatRoom();
+const user1 = new User("Alice", chatRoom);
+const user2 = new User("Bob", chatRoom);
+
+user1.send("Hello, Bob!"); // ✅ Alice: Hello, Bob!
+user2.send("Hey, Alice!"); // ✅ Bob: Hey, Alice!
+// Centralized event handling.
+```
+
+### State Pattern
+Allows an object to change behavior when its state changes. Use case: Handling UI states (e.g., button disabled/enabled).
+
+```
+class TrafficLight {
+  constructor() {
+    this.state = new RedLight();
+  }
+
+  changeState(state) {
+    this.state = state;
+  }
+
+  showSignal() {
+    this.state.showSignal();
+  }
+}
+
+class RedLight {
+  showSignal() {
+    console.log("Stop! Red light.");
+  }
+}
+
+class GreenLight {
+  showSignal() {
+    console.log("Go! Green light.");
+  }
+}
+
+// Usage
+const light = new TrafficLight();
+light.showSignal(); // ✅ Stop! Red light.
+light.changeState(new GreenLight());
+light.showSignal(); // ✅ Go! Green light.
+
+//UI elements that change behavior based on state.
+```
+
+### Observer Pattern
+Used for event-driven programming, where multiple objects listen for state changes.
+
+```
+class Subject {
+  constructor() {
+    this.observers = [];
+  }
+
+  subscribe(observer) {
+    this.observers.push(observer);
+  }
+
+  unsubscribe(observer) {
+    this.observers = this.observers.filter((obs) => obs !== observer);
+  }
+
+  notify(data) {
+    this.observers.forEach((observer) => observer.update(data));
+  }
+}
+
+class Observer {
+  update(data) {
+    console.log("Received data:", data);
+  }
+}
+
+const subject = new Subject();
+const observer1 = new Observer();
+subject.subscribe(observer1);
+subject.notify("New update!"); // ✅ Received data: New update!
+
+```
+### Strategy Pattern
+Allows switching between different algorithms dynamically.
+
+```
+class PaymentContext {
+  setStrategy(strategy) {
+    this.strategy = strategy;
+  }
+
+  pay(amount) {
+    this.strategy.pay(amount);
+  }
+}
+
+class CreditCardPayment {
+  pay(amount) {
+    console.log(`Paid ${amount} using Credit Card`);
+  }
+}
+
+class PayPalPayment {
+  pay(amount) {
+    console.log(`Paid ${amount} using PayPal`);
+  }
+}
+
+// Usage
+const payment = new PaymentContext();
+payment.setStrategy(new PayPalPayment());
+payment.pay(100); // ✅ Paid 100 using PayPal
+
+//Use case: Payment processing, authentication strategies.
+
+
+```
+### Command Pattern
+Encapsulates actions as objects, allowing for undo/redo operations.
+
+```
+
+class Light {
+  on() {
+    console.log("Light is ON");
+  }
+
+  off() {
+    console.log("Light is OFF");
+  }
+}
+
+class LightOnCommand {
+  constructor(light) {
+    this.light = light;
+  }
+
+  execute() {
+    this.light.on();
+  }
+}
+
+class RemoteControl {
+  constructor() {
+    this.command = null;
+  }
+
+  setCommand(command) {
+    this.command = command;
+  }
+
+  pressButton() {
+    this.command.execute();
+  }
+}
+
+// Usage
+const light = new Light();
+const lightOn = new LightOnCommand(light);
+
+const remote = new RemoteControl();
+remote.setCommand(lightOn);
+remote.pressButton(); // ✅ Light is ON
+
+//Use case: Implementing undo/redo functionality.
+
+
+```
+
+
+
