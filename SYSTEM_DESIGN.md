@@ -1,4 +1,4 @@
-# ================== SYSTEM DESIGN =========================
+# =============== SYSTEM DESIGN ===================
 
 ## Front End Desing Topics
 
