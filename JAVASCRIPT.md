@@ -625,6 +625,49 @@ parent.addEventListener('click', function(event) {
 
 ![wfL82](https://github.com/user-attachments/assets/ce94cf85-bd7d-4adc-b7af-5ee3d1b39879)
 
+## what is parameters, arguments & rest operators?
+
+- Parameters: Variable in the function's declaration param1, param2
+  
+       ```
+        function ABC(param1, param2 ){
+         console.log(arguments); // Arguments object
+         console.log(param1, param2);
+        }
+      
+       ABC("Test Argument1", "Test Argument2");
+      ```
+- Arguments: Arguments are the values which received by the function or while executing ABC("Test Argument1", "Test Argument2")
+  
+    - Array-like object containing all function arguments.
+    -  Not a real array (no .map(), .filter(), etc.)
+    -  Available in regular functions (not arrow functions).
+    -  Not available in arrow functions (this binding issues).
+    -  Cannot use with default or named parameters.
+    -  ```
+       function sum() {
+          console.log(arguments); // Arguments object
+          return Array.from(arguments).reduce((acc, num) => acc + num, 0);
+        }
+        
+        console.log(sum(1, 2, 3, 4)); // ✅ 10
+
+       ```
+  
+- rest Operators: If we are passing more than one variables (Params) in the functinons declration we can simply pass (3 dots) function (...numbers) {}
+  
+   -  Works in both regular and arrow functions.
+   -  Real array (has .map(), .reduce(), etc.).
+   -  Can be used with named parameters.
+   -  ```
+      function sum(...numbers) {
+        console.log(numbers); // Real array
+        return numbers.reduce((acc, num) => acc + num, 0);
+      }
+      
+      console.log(sum(1, 2, 3, 4)); // ✅ 10
+
+      ```
 
 # ================ REACT JS ================
 
