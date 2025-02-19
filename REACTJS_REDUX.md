@@ -941,6 +941,9 @@ Redux Saga is a middleware that uses generators (function*) to handle side effec
 | Side Effects | Limited control over async logic| Advanced control (cancellation, retry, parallel tasks) |
 | Use Case | Basic API calls, simple state updates | Complex async flows, polling, WebSocket handling |
 
+- Use Redux Thunk if you need a lightweight, easy-to-use async handler for basic API calls.
+- Use Redux Saga if your project requires complex side effects, parallel tasks, or cancellation.
+
 	 	
 		
 		
