@@ -784,6 +784,74 @@ The page content is "rendered" but not yet interactive, because there are no eve
 - Performance: SSR provides a faster initial page load because the browser can render HTML directly from the server, while React's JavaScript bundle is still being loaded in the background. Hydration ensures that the app becomes interactive without re-rendering the entire page.
 - SEO: Server-side rendering helps improve SEO because the content is rendered and sent to the browser as plain HTML, making it easier for search engines to crawl and index the page.
 - User Experience: Users can start interacting with the page faster, especially when using techniques like code-splitting, as only essential JavaScript is needed for hydration.
+- 
+
+
+# =================== REDUX STORE ============================
+
+## What are the main principles of Redux?
+
+The main principles of Redux are designed to manage the state of an application in a predictable and maintainable of an application’s state, especially in larger applications.
+
+**Single Source of Truth:**
+- State is stored in a single object (the store), making it easier to track and manage the application's state. This single store represents the entire state of the app, ensuring that the application behaves consistently and predictably across different components.
+- By keeping the state centralized, you can access any part of the state from anywhere in the app, making debugging and testing easier.
+
+**State is Read-Only**
+- The state in Redux is immutable, meaning it cannot be directly modified. Instead of modifying the state directly, actions are dispatched to describe the changes you want to make.
+- To update the state, you must dispatch an action, which is a plain JavaScript object that describes what happened. Then, a reducer function processes the action and returns a new state.
+
+**Changes to State are Made with Pure Functions (Reducers)**
+- The state is updated through reducers, which are pure functions. A pure function is a function that:
+  - Always returns the same output for the same input.
+  - Does not modify its inputs (in this case, it doesn't mutate the existing state).
+  - Does not have side effects (it does not interact with external systems like the network or storage).
+- Reducers take the current state and an action as arguments, and they return a new state without mutating the old one.
+
+**Actions**
+- Actions are plain JavaScript objects that describe what happened in the application. Each action must have a type property (a string) that describes the action, and optionally, any additional data that the reducer needs to update the state.
+- ```
+  const action = {
+    type: 'ADD_TODO',
+    payload: { text: 'Learn Redux' }
+  };
+
+  ```
+**Dispatching Actions**
+- To trigger a state change, actions are dispatched. This is the process of sending the action to the Redux store, where it will be handled by the appropriate reducer.
+- In a React component, dispatching an action might look like this
+- ```
+  dispatch({ type: 'ADD_TODO', payload: newTodo });
+  ```
+**Reducers**
+- Reducers are pure functions that specify how the state of the application changes in response to an action.
+- A reducer receives the current state and an action, and it returns a new state based on the action type.
+```
+  function todosReducer(state = [], action) {
+    switch (action.type) {
+      case 'ADD_TODO':
+        return [...state, action.payload];
+      default:
+        return state;
+    }
+  }
+```
+
+**Unidirectional Data Flow**
+- Redux follows a one-way data flow, where the flow of data is predictable:
+  - The view (React components) triggers an action.
+  - The action is dispatched to the store
+  - The store runs the reducers to compute the new state.
+  - The new state is passed to the view (UI) to update the display.
+- This helps ensure that changes to the state flow in a predictable and consistent way, making it easier to debug and reason about the application.
+
+**Summary**
+- Single Source of Truth: The entire app’s state is stored in one central place (the store).
+- State is Read-Only: You can only change the state by dispatching actions, not by modifying the state directly.
+- Changes are Made with Pure Functions: Reducers are pure functions that compute the new state based on the action.
+- Unidirectional Data Flow: Actions flow in one direction from the view to the store, ensuring predictable updates to the state.
+
+
 
 
 
