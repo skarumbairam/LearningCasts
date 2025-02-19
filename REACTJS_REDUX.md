@@ -787,7 +787,7 @@ The page content is "rendered" but not yet interactive, because there are no eve
 - 
 
 
-# ================ REDUX STORE ======================
+# =========== REDUX STORE ==============
 
 ## What are the main principles of Redux?
 
