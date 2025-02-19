@@ -944,6 +944,127 @@ Redux Saga is a middleware that uses generators (function*) to handle side effec
 - Use Redux Thunk if you need a lightweight, easy-to-use async handler for basic API calls.
 - Use Redux Saga if your project requires complex side effects, parallel tasks, or cancellation.
 
+## What are React Redux Toolkit: Key Concepts?
+
+Redux Toolkit (RTK) simplifies state management in React by reducing boilerplate and providing easy-to-use functions like store, slice, useDispatch, and useSelector.
+
+**1. Store (configureStore)**
+
+The store is the global state container that holds application data and allows components to access and modify it.
+
+**creating store**
+
+```
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counterSlice"; // Import reducer from slice
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer, // Combine multiple slices here
+  },
+});
+
+export default store;
+```
+- configureStore sets up the Redux store.
+- It takes a reducer (from slices) to manage state.
+
+**2. Slice (createSlice)**
+
+A slice is a collection of state, reducers, and actions for a specific feature.
+
+**Creating a Counter Slice:**
+
+```
+import { createSlice } from "@reduxjs/toolkit";
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: { value: 0 }, // Initial state
+  reducers: {
+    increment: (state) => { state.value += 1; },
+    decrement: (state) => { state.value -= 1; },
+  },
+});
+
+export const { increment, decrement } = counterSlice.actions; // Export actions
+export default counterSlice.reducer; // Export reducer for store
+
+```
+- createSlice simplifies reducer and action creation.
+- initialState defines default values.
+- reducers handle state updates.
+
+**3. useDispatch (Trigger Actions)**
+
+useDispatch allows components to send actions to the Redux store.
+
+**Using useDispatch in a Component:**
+
+```
+import { useDispatch } from "react-redux";
+import { increment, decrement } from "./counterSlice";
+
+const CounterButtons = () => {
+  const dispatch = useDispatch(); // Get dispatch function
+
+  return (
+    <div>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
+    </div>
+  );
+};
+
+export default CounterButtons;
+
+```
+
+- dispatch(increment()) updates the store by calling the reducer.
+
+**4. useSelector (Read State)**
+
+useSelector allows components to read data from the Redux store.
+
+**Using useSelector in a Component:**
+
+```
+import { useSelector } from "react-redux";
+
+const CounterDisplay = () => {
+  const count = useSelector((state) => state.counter.value); // Read state
+
+  return <h1>Count: {count}</h1>;
+};
+
+export default CounterDisplay;
+
+```
+- useSelector gets the latest state from the Redux store.
+
+**5. Connecting Redux to React (Provider)**
+
+To use Redux in a React app, wrap the app with <Provider>.
+
+// index.js 
+```
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "./store";
+import CounterDisplay from "./CounterDisplay";
+import CounterButtons from "./CounterButtons";
+
+ReactDOM.render(
+  <Provider store={store}>
+    <CounterDisplay />
+    <CounterButtons />
+  </Provider>,
+  document.getElementById("root")
+);
+
+```
+- <Provider store={store}> makes Redux available in the entire app.
+
 # ============= NEXT JS ============
 
 ## What is Next.js, and how does it differ from React?
