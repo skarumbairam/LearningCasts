@@ -668,3 +668,151 @@ parent.addEventListener('click', function(event) {
       console.log(sum(1, 2, 3, 4)); // ✅ 10
 
       ```
+
+## What are the performance factors of applications?
+
+
+### React Profilor 
+
+React Profiler is a tool provided within React DevTools that helps analyze the performance of your React application. It allows you to measure the rendering time of each component, track unnecessary re-renders, and identify performance bottlenecks at the component level.
+
+Key benefits:
+
+- Measure render times: See how long each component takes to render, helping you spot inefficient components.
+- Optimize performance: By identifying which components are slow or re-rendering unnecessarily, you can focus on optimizing those areas.
+- Track re-renders: Understand why a component re-renders (e.g., due to state changes, prop updates), helping to reduce unnecessary re-renders.
+
+How to use:
+
+- Open React DevTools in your browser.
+- Navigate to the Profiler tab.
+- Start recording while interacting with your app.
+- View the component render times, re-renders, and other performance details.
+- This tool is specifically useful when optimizing complex apps where performance at the component level matters.
+
+### SSR (Server-Side Rendering) vs. CSR (Client-Side Rendering)
+
+When deciding between SSR and CSR, it's important to consider the specific needs of your application:
+
+**CSR (Client-Side Rendering):** If the website is rich in user interactions after the initial load, and SEO is not a major concern (e.g., single-page apps or applications that are not content-heavy), CSR is often the better choice. It provides a faster, more dynamic user experience once the JavaScript is loaded, but SEO may be less optimized.
+
+**SSR (Server-Side Rendering):** If SEO and initial load time are crucial (for content-heavy websites or those requiring better indexing by search engines), SSR is typically preferred. It renders the content on the server and sends a fully rendered page to the client, improving SEO and reducing time to content.
+
+**Hybrid Approach:** In some cases, a hybrid approach can be beneficial, where critical content is rendered server-side for SEO and faster initial load, and dynamic parts of the site are rendered client-side for better interactivity. Technologies like Next.js or Nuxt.js support this hybrid approach.
+
+### Code Splitting 
+
+Code splitting is a technique in web development that breaks up large JavaScript files into smaller, more manageable chunks. This improves the initial loading time of a web page by loading only the necessary code upfront, while the rest of the code is loaded as needed (on-demand).
+
+With code splitting, parts of the application that aren’t immediately needed (like components not visible or not used on the current page) are split into separate bundles, and they are loaded only when the user interacts with them.
+
+Benefits:
+
+- Improved initial load time: Reduces the size of the initial JavaScript file that the browser needs to download.
+- On-demand loading: Lazy-load components and resources only when required, making the site feel faster and more responsive.
+- Better performance: Smaller bundle sizes lead to faster parsing and execution of JavaScript.
+```
+import React, { Suspense } from 'react';
+
+// Lazy load the component
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+const App = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <MyComponent />
+  </Suspense>
+);
+
+```
+
+### Error Boundaries in React:
+- React Error Boundaries are components that help catch JavaScript errors anywhere in a component tree and log those errors, and optionally display a fallback UI to the user.
+- You can use the react-error-boundary library for this purpose, but React's built-in error boundaries do not require an external library.
+
+### The Core Web Vitals are:
+
+- Gives a better user experience
+- Best SEO ranking
+- Standardize performance matrices 
+
+**Largest Contentful Paint (LCP)**: Measures loading performance. It tracks the time it takes for the largest visible content (like an image or text block) to load.
+Good score: < 2.5 seconds
+
+**First Input Delay (FID):** Measures interactivity. It tracks the time from when a user first interacts with the page (clicking a button or link) to when the browser responds.
+Good score: < 100 ms
+
+**INP (Interaction to Next Paint)** What it measures: INP tracks the time from when a user interacts with the page (similar to FID) to the next visible change on the screen after that interaction (such as rendering new content, or updating the UI).
+
+Why it matters: It offers a more comprehensive measure of interactivity because it captures how quickly the page responds and reflects the change after user input.
+
+Good score: INP should be less than 200 milliseconds for optimal performance.
+
+**Cumulative Layout Shift (CLS):** Measures visual stability. It tracks how much the page layout shifts during loading, affecting user experience.
+Good score: < 0.1
+Example: A webpage that loads slowly (high LCP), takes a long time to respond to user interactions (high FID), and has content that shifts around (high CLS) will have poor Core Web Vitals scores, indicating a poor user experience.
+
+### Virtualization 
+
+Virtualization in React is a technique used to efficiently render large lists or collections of items by only rendering the visible portion of the list, instead of rendering the entire list at once. This reduces memory usage and improves performance, especially for long or infinite scrollable lists.
+
+Improved performance: By rendering only a small number of items, the browser uses less memory and can render faster.
+Reduced rendering time: The number of DOM nodes is minimized, leading to faster updates and reduced layout recalculations.
+
+```
+import { FixedSizeList as List } from 'react-window';
+
+const MyList = () => {
+  const items = Array.from({ length: 1000 }, (_, index) => `Item ${index + 1}`);
+
+  const Post = ({index}) => {
+    
+  }
+  return (
+    <List
+      height={400} // Visible height of the list
+      itemCount={items.length} // Total number of items
+      itemSize={35} // Height of each item
+      width={300} // Width of the list
+    >
+      {({ index, style }) => (
+        <div style={style}>{items[index]}</div>
+      )}
+    </List>
+  );
+};
+
+```
+
+### Accessibility 
+
+Web Accessibility (a11y) is the practice of ensuring that websites and web applications are usable by all people, including those with disabilities. This includes users with visual, auditory, motor, or cognitive impairments. Accessible websites provide alternative methods of interaction, so users can access content and functionality using various tools and assistive technologies (e.g., screen readers, voice recognition software).
+
+**Key Principles of Web Accessibility:**
+
+- Perceivable: Information and user interface components must be presented in ways that users can perceive. For example, text should have sufficient contrast, and images should have alt text for screen readers.
+- Operable: The interface must be operable by all users. For example, forms should be navigable via the keyboard, and buttons should be accessible via both mouse and keyboard.
+- Understandable: Information and the operation of the user interface must be understandable. For example, clear instructions should be provided, and content should be structured logically.
+- Robust: Content must be robust enough to work with current and future technologies, including assistive technologies.
+
+**How to Check Web Accessibility:**
+
+You can check web accessibility manually or use tools to help automate the process. Here are some common methods:
+
+**Manual Testing:**
+
+- Keyboard Navigation: Ensure all interactive elements can be navigated using only the keyboard (e.g., tabbing through form fields, buttons, etc.).
+- Screen Reader: Use screen reader software (e.g., NVDA, VoiceOver) to check if all content is read out and correctly structured.
+- Color Contrast: Ensure there is sufficient contrast between text and background, using tools like the WCAG Contrast Checker.
+
+**Automated Tools:**
+
+Lighthouse (built into Chrome DevTools):
+  - Open the DevTools (F12) → Go to the Lighthouse tab → Select "Accessibility" and click "Generate Report."
+  -`It gives a score for accessibility and suggests improvements.
+- axe Accessibility Checker: A browser extension that checks for accessibility issues and provides detailed reports on how to fix them.
+- WAVE (Web Accessibility Evaluation Tool): An online tool that analyzes web pages for accessibility issues and offers suggestions.
+- React A11y: For React applications, this tool provides linting rules to catch accessibility issues during development.
+
+**Conclusion:**
+Web accessibility ensures everyone, regardless of ability, can access and interact with web content. By using tools like Lighthouse, axe, and following WCAG guidelines, you can make sure your website is accessible and provides a better experience for all users.
+
