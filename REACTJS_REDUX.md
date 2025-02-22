@@ -1065,25 +1065,6 @@ ReactDOM.render(
 ```
 - <Provider store={store}> makes Redux available in the entire app.
 
-# ====== REACT JS & TYPE SCRIPT ======
-
-**Topics:**
-
-- Basic & Advanced types
-- Event & Styles
-- useState
-- useReducer
-- Context API
-- useRef
-- Components as props
-- Generics
-- Restricting props
-- Template literals & Exclude
-- Wrapping HTML & OMIT
-- Extracting component prop type
-- Polymorphic components
-
-
 
 # ============= NEXT JS ============
 
