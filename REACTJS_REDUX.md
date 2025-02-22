@@ -1290,3 +1290,90 @@ Next.js provides a set of utilities to handle the request and response inside th
 - Next.js also supports nested dynamic routes, catch-all routes, and optional catch-all routes.
 - For dynamic content, you can use getStaticProps with getStaticPaths for static generation or getServerSideProps for server-side rendering.
 - Dynamic routes in Next.js enable you to build flexible, data-driven applications where the URL path is dynamically determined and content can be fetched based on the URL parameters.
+
+# ======= DEV OPS ===================
+
+What is DevOps?
+
+DevOps is a set of practices that combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle and deliver high-quality software continuously. It emphasizes collaboration, automation, and monitoring throughout the software development process.
+
+Example: Using tools like Jenkins for continuous integration and Docker for containerization to automatically test, build, and deploy code changes faster and more reliably. 
+
+SDLC (Software Development Life Cycle) is a process used by development teams to design, develop, test, and deploy software. It includes stages such as planning, analysis, design, coding, testing, deployment, and maintenance.
+
+Example: In SDLC, the "Testing" phase ensures the software is free of bugs before deployment, while the "Design" phase outlines how the software will be structured.
+
+- Requirement 
+- Analysis
+- Design
+- Develop (Code Build)
+- Testing
+- Verification & Releasing
+
+Methodologies (Culture):
+A set of rules and structures followed by big companies is called Methodologies 
+
+- Waterfall
+- Agile
+- DevOps
+
+=============
+**Waterfall:**
+==============
+
+It is traditional Methodologies and it is a linear sequence. If any of the above steps are blocked it never takes to the next state. It has to start from the start with Requirements, Analysis, etc...
+
+**Disadvantages:**
+
+- Inflexibility changes
+- Late Test --> The Project is high risk if something goes wrong at the end
+- Customer Involvement - User expectations can't meet
+- Delivery delay - 9 months to 1 year
+
+=============
+**Agile**
+=============
+
+An iterative & flexible approach instead of a linear sequence 
+Sprint meeting (Daily Scrum meeting)
+
+- Flexibility ---- > made any changes at any stage
+- Customer collaboration - Throughout project (User expectation meet)
+- Early continues delivery -
+- Team collaboration
+- Improving quality as introduced continues testing
+
+**Disadvantages**
+
+- Less predictability ---- Budget & Time 
+- Required Experience Team ---- Decision-making
+- Measuring progress ---- As focussed on iterative methods of development and testing no documentation and design
+
+============
+**DevOps**
+============
+
+Dev Team + Ops team
+
+- Focused on Automation
+- Fastest delivery
+- Scalability (Scale up & Scale down)
+
+**DevOps Stages:**
+
+- Source Code Management
+- Continues Integration (Jenkins, etc)
+- Continues Monitoring (Splunk, Grhaphana)
+- Continues Configuration (TERAFORM, IAAC)
+- Continues Deployment
+- Continues Testing
+- Continues Feedback (Updates)
+
+**Source Code Management:**
+
+Version control -> Git & GitHub.. Process of managing system and change records
+
+
+
+
+
