@@ -939,9 +939,9 @@ person1.greet(); // Output: Hello, my name is John and I am 25 years old.
 
 Access modifiers define the visibility of class members. There are three types:
 
-public	- Accessible anywhere (default modifier)
-private - Accessible only inside the class
-protected - Accessible within the class and its subclasses
+- public	- Accessible anywhere (default modifier)
+- private - Accessible only inside the class
+- protected - Accessible within the class and its subclasses
 
 **Using Access Modifiers**
 
