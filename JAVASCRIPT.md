@@ -1008,3 +1008,100 @@ Security is a critical concern in web application development. Web applications 
      - Use a Web Application Firewall (WAF) to filter malicious traffic.
      - Implement rate limiting, traffic throttling, and CAPTCHAs to prevent automated attacks.
      - Use DDoS protection services like Cloudflare, AWS Shield, or Akamai to absorb traffic surges.
+
+## HTML 5 & CSS Related Questions ?
+
+**HTML5 introduced:**
+
+- Semantic Elements → <header>, <footer>, <article>, <section>, <aside>
+- Multimedia Support → <audio>, <video>
+- Canvas & SVG → <canvas> for 2D graphics
+- Form Enhancements → New input types (email, number, date)
+- Web Storage → localStorage & sessionStorage
+- WebSockets → For real-time communication
+
+### Difference between localStorage, sessionStorage, and cookies?
+
+| Feature | #localStorage  | #sessionStorage  | #cookies |
+| ------- | --- | --- | --- |
+| Size | 5MB | 5MB | 4KB |
+| Expires | Never | On tab close	 | Custom |
+| Access | Only JS	 | Only JS	 | Server & JS |
+| Stored in	 | Browser | Browser | Sent with requests |
+
+### Difference between <div> and <section>?
+
+- <div> → Generic, no meaning
+- <section> → Groups related content, improves accessibility & SEO
+
+### What is data-* attribute used for?
+
+Stores custom metadata in HTML without affecting layout.
+
+### Difference between <script defer> and <script async>?
+
+- async → Loads asynchronously, executes immediately
+- defer → Loads asynchronously, executes after HTML parsing
+
+### Positioning (relative, absolute, fixed, sticky)?
+ - relative → Moves relative to itself
+ - absolute → Moves relative to nearest positioned ancestor(Parent Element)
+ - fixed → Stays fixed on the screen
+ - sticky → Acts relative until a scroll threshold
+
+### Difference between em, rem, %, vh, vw?
+ - em → Relative to parent
+ - rem → Relative to root (html)
+ - % → Relative to parent width/height
+ - vh/vw → Viewport height/width
+
+### Pseudo-classes vs Pseudo-elements?
+- Pseudo-class → Applies based on state (:hover, :nth-child(), :active)
+- Pseudo-element → Styles part of an element (::first-letter, ::before, ::after)
+
+### Difference between visibility: hidden vs display: none?
+ - visibility: hidden → Hides element, but keeps space
+ - display: none → Removes element from layout
+
+### How z-index works?
+ - Controls stacking order → Higher z-index appears on top
+### What are the different types of CSS Selectors?
+ - Universal Selector (*) → Selects all elements
+ - Class Selector (.class) → Targets elements with specific class
+ - ID Selector (#id) → Targets unique element
+ - Attribute Selector ([type="text"]) → Selects elements by attribute
+
+### What is the Box Model in CSS?
+
+The CSS Box Model describes how elements are structured in a web page. It consists of:
+- Content: The actual text or image inside the box
+- Padding: Space around the content
+- Border: Surrounds the padding
+- Margin: Space between elements
+- Total Width = width + padding + border + margin
+- Use box-sizing: border-box; to include padding & border in the element's total width.
+
+### What is PWA ?
+
+A Progressive Web App (PWA) is a web application that provides a native app-like experience using modern web technologies. It can work offline, load fast, and be installable like a mobile app.
+
+PWAs are lighter than native apps (no large downloads).
+
+No need to build separate iOS & Android apps.
+
+Works on mobile, tablet, and desktop without extra development.
+
+✔ A single codebase for all platforms (Android, iOS, Windows, Mac).
+
+✔ Example: Uber PWA works across devices with a minimal app size.
+
+✔ A single codebase saves time & resources.
+
+✔ Example: Alibaba PWA increased conversions by 76% at a lower cost.
+
+✔ Uses less mobile data with smart caching.
+
+✔ Example: Starbucks PWA is 99% smaller than its native app.
+
+
+
