@@ -314,6 +314,24 @@ Promise.all([promise1, promise2, promise3, promise4])
 
 Note:
 In this example, promise3 rejects after 1.5 seconds, so Promise.all() will immediately reject, and the remaining promises (promise1, promise2, promise4) are not waited for.
+
+Example 2:
+const p1 = Promise.resolve("✅ Promise 1 resolved");
+const p2 = Promise.reject("❌ Promise 2 rejected");
+const p3 = Promise.resolve("✅ Promise 3 resolved");
+
+Promise.all([p1, p2, p3])
+  .then((results) => {
+    console.log("All Promises Resolved:", results);
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+
+The result, if Error occurs one of Promise: ❌ Promise 2 rejected 
+The result, if All Promises Resolved: [ '✅ Promise 1 resolved', '✅ Promise 2 resolved', '✅ Promise 3 resolved' ]
+
+
 ```
 
 **Promise.allSettled()** is a method that waits for all promises to settle, regardless of whether they resolve (succeed) or reject (fail). Unlike Promise.all(), which rejects immediately if any promise fails, Promise.allSettled() ensures that all promises complete and provides an array of results, indicating whether each promise was resolved or rejected.
@@ -355,7 +373,40 @@ All promises settled: [
 
 **Promise.race()** is a method that waits for the first promise to settle (either fulfill or reject). As soon as one of the promises settles (either resolves or rejects), Promise.race() immediately settles with the result of that first settled promise. The remaining promises are ignored once the first one has settled.
 
+```
+const p1 = new Promise((resolve) => setTimeout(resolve, 300, "✅ Promise 1 resolved"));
+const p2 = new Promise((resolve) => setTimeout(resolve, 200, "✅ Promise 2 resolved"));
+const p3 = new Promise((resolve) => setTimeout(resolve, 500, "✅ Promise 3 resolved"));
+
+Promise.race([p1, p2, p3]).then(console.log).catch(console.error);
+
+// Output : ✅ Promise 2 resolved
+// The fastest promise (p2) resolved first, so Promise.race() returned that result.
+```
+
 **Promise.any()** is wait for the first settled promise with a successful value. If all promises are rejected, it returns an aggregated error.
+
+```
+const p1 = new Promise((resolve) => setTimeout(resolve, 300, "✅ Promise 1 resolved"));
+const p2 = new Promise((resolve) => setTimeout(resolve, 200, "✅ Promise 2 resolved"));
+const p3 = new Promise((_, reject) => setTimeout(reject, 100, "❌ Promise 3 rejected"));
+
+Promise.any([p1, p2, p3]).then(console.log).catch(console.error);
+
+// Output : ✅ Promise 2 resolved
+
+
+//Example for all rejections:
+
+const p1 = new Promise((_, reject) => setTimeout(reject, 100, "❌ Promise 1 rejected"));
+const p2 = new Promise((_, reject) => setTimeout(reject, 200, "❌ Promise 2 rejected"));
+
+Promise.any([p1, p2])
+  .then(console.log)
+  .catch((error) => console.error(error.errors)); // .errors gives an array of all rejection reasons
+
+Output : [ '❌ Promise 1 rejected', '❌ Promise 2 rejected' ]
+```
 
 
 ## What is event loop in javascript?
