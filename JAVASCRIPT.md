@@ -816,3 +816,122 @@ Lighthouse (built into Chrome DevTools):
 **Conclusion:**
 Web accessibility ensures everyone, regardless of ability, can access and interact with web content. By using tools like Lighthouse, axe, and following WCAG guidelines, you can make sure your website is accessible and provides a better experience for all users.
 
+### Image Optimization
+- What it is: Compress and serve images in formats that are optimized for the web (e.g., WebP, AVIF).
+- How to implement: Use image compression tools like ImageOptim, TinyPNG, or Squoosh; implement responsive image sizes (srcset) for various screen resolutions.
+- Benefit: Reduces image file size and loading times without sacrificing quality.
+
+### Minimize HTTP Requests
+
+- What it is: Reduce the number of requests made by the browser.
+
+- How to implement:
+
+ - Combine CSS and JavaScript files.
+ - Use SVG sprites for icons.
+ - Inline small assets (e.g., small images, CSS) directly in HTML using Base64.
+- Benefit: Reduces the amount of data transferred and speeds up the page load time.
+
+### Use Content Delivery Networks (CDN)
+
+- What it is: Distribute your static assets (images, CSS, JS) across a global network of servers.
+- How to implement: Use CDNs like Cloudflare, AWS CloudFront, or Fastly.
+- Benefit: Reduces latency by serving content from a server closer to the user.
+
+### Asynchronous Loading for Scripts
+
+- What it is: Load JavaScript files asynchronously to avoid blocking page rendering.
+- How to implement: Use the async or defer attribute for external JavaScript files.
+- Benefit: Ensures the page content loads without waiting for scripts to finish.
+
+### Caching Resources 
+
+- What it is: Cache resources to avoid fetching the same data repeatedly.
+- How to implement: Use Service Workers, set proper Cache-Control headers, and implement browser caching strategies.
+- Benefit: Reduces repeated network requests and makes your site faster by serving assets from the cache.
+
+### Prefetch and Preload Resources
+
+- What it is: Load resources like fonts or images in advance so they're available when needed.
+- Preload makes the browser start fetching resources early (before the browser needs it) to ensure they're ready when needed.
+- It is used for critical resources that are required early in the page load.
+- Preload is often used for scripts, styles, fonts, or images that are needed in the next part of the page.
+- ```
+  <link rel="preload" href="critical-style.css" as="style">
+  <script rel="preload" href="critical-script.js" as="script"></script>
+  ```
+- Prefetch is used for resources that are likely to be needed in the future, often for subsequent pages or interactions.
+- It has a lower priority than preload, so it doesn't interfere with the current page rendering.
+- Prefetch is typically used for resources related to the next possible page the user might visit (e.g., JavaScript files, images for next page).
+- ```
+  <link rel="prefetch" href="next-page.js">
+  ```
+**Example Use Case Scenario:**
+
+Imagine a single-page app (SPA) with multiple sections:
+
+- The homepage (current page) needs a critical script for rendering above-the-fold content. Use preload for that script.
+- When the user scrolls to a new section or clicks a button to load additional content, you know that the resources for that section will be needed shortly. Use prefetch to fetch the necessary resources in advance.
+
+### Web Workers:
+
+Web Workers are a feature of web browsers that allow you to run JavaScript code in the background, outside the main browser thread. This helps prevent performance bottlenecks that occur when long-running tasks block the UI thread, making the application slow or unresponsive. In simple terms, Web Workers allow you to run JavaScript tasks in parallel, without affecting the user interface's smoothness or responsiveness.
+
+**How Web Workers Work:**
+
+- Main Thread (UI Thread): This is where the regular JavaScript code runs and interacts with the DOM, updating the user interface.
+- Worker Thread: This is a separate thread created by the main thread where you can offload heavy, non-UI tasks (like complex calculations or data processing).
+- The key advantage is that Web Workers allow your web application to stay responsive while performing intensive operations, like processing large amounts of data or performing computations.
+- Non-blocking: The main UI thread is not blocked by long-running tasks. The user can continue interacting with the web page while the background work happens in the worker.
+- Separate Environment: Web Workers run in their own isolated thread and do not have access to the DOM directly. They can only communicate with the main thread through a messaging system.
+- Multithreading: Web Workers allow you to run JavaScript in parallel, taking advantage of multiple cores in modern CPUs for better performance.
+
+**How to Create a Web Worker:**
+
+Creating a Simple Worker, main.js (main thread, where the UI runs):
+
+```
+// Create a new Web Worker instance and link to the worker script.
+const worker = new Worker('worker.js');
+
+// Send a message to the worker to start a task.
+worker.postMessage('Start processing');
+
+// Listen for messages from the worker (results, updates, etc.)
+worker.onmessage = function (event) {
+    console.log('Result from worker: ', event.data);
+};
+
+// Handle any errors in the worker.
+worker.onerror = function (error) {
+    console.error('Error in worker: ', error.message);
+};
+
+```
+
+worker.js (worker thread):
+
+```
+// The worker receives a message from the main thread.
+onmessage = function (event) {
+    if (event.data === 'Start processing') {
+        // Simulating a heavy computational task
+        let result = 0;
+        for (let i = 0; i < 1e9; i++) {
+            result += i;
+        }
+        
+        // Send the result back to the main thread.
+        postMessage(result);
+    }
+};
+```
+**Limitations:**
+
+- No DOM Access: Web Workers run in a separate thread and cannot directly access or modify the DOM. They are restricted to JavaScript execution, which ensures that UI updates are not blocked.
+- Communication Overhead: The communication between the main thread and workers occurs through message-passing (i.e., postMessage). This can introduce some overhead, especially if large amounts of data are passed frequently.
+- Browser Support: While most modern browsers support Web Workers, older browsers (e.g., Internet Explorer) may not fully support them.
+
+**Conclusion:**
+
+Web Workers are an excellent tool for performing computationally expensive or time-consuming tasks in the background, without affecting the user experience. They enable better performance by utilizing multithreading, ensuring the main UI thread stays responsive. By offloading tasks such as data processing, sorting, and complex computations, Web Workers allow for faster, more efficient web applications.
