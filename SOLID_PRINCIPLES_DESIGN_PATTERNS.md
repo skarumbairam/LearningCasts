@@ -364,28 +364,28 @@ Design patterns are reusable solutions to common problems in software design. Th
 | -------- | --------- | --------------|
 | Factory | Creational| Object creation|
 | Abstract Factory | Creational| Creating related objects |
+| Builder | Creational | Step-by-step object creation |
 | Prototype | Creational | Object cloning |
 | Singleton | Creational | Global instances (e.g., database) |
-| Builder | Creational | Step-by-step object creation |
 | | |
 | Adapter | Structural | Making incompatible interfaces work |
-| Proxy | Structural | Controlling access (e.g., caching) |
-| Flyweight | Structural | Memory optimization |
 | Bridge | Structural | Decoupling abstraction from implementation |
+| Composite | Structural | | 
 | Decorator | Structural | Adding extra functionality dynamically |
-| Composite | Structural | lets you compose objects into tree structures and then work with these structures as if they were individual objects.|
+| Flyweight | Structural | Memory optimization |
 | Facade | Structural | provides a simplified interface to a library, a framework, or any other complex set of classes. |
+| Proxy | Structural | Controlling access (e.g., caching) |
 | | |
 | Chain of Responsibility | Behavioral |  |
+| Command	 | Behavioral	| Encapsulating actions as objects |
+| Observer | Behavioral | Event-driven programming |
 | Iterator | Behavioral | |
 | Memento | Behavioral | |
+| Mediator	| Behavioral	| Centralized communication |
+| Strategy | Behavioral | Switching algorithms dynamically |
+| State	| Behavioral | Handling UI state changes
 | Template Method | Behavioral |  |
 | Visitor | Behavioral | 
-| Observer | Behavioral | Event-driven programming |
-| Strategy | Behavioral | Switching algorithms dynamically |
-| Command	 | Behavioral	| Encapsulating actions as objects |
-| Mediator	| Behavioral	| Centralized communication |
-| State	| Behavioral | Handling UI state changes
 
 ## Creational Patterns & code examples
 
