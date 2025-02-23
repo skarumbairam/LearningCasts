@@ -907,6 +907,123 @@ remote.pressButton(); // ✅ Light is ON
 
 In TypeScript, a class is a blueprint for creating objects with properties and methods. It supports OOP concepts like encapsulation, inheritance, and polymorphism while also adding type safety.
 
+### What are the oops concepts
+
+**1. Encapsulation (Data Hiding**
+
+- Encapsulation restricts direct access to object data and modifies it using getters & setters.
+- Protects data from unintended modifications.
+- Improves security by exposing only necessary details.
+```
+class BankAccount {
+  private balance: number;
+
+  constructor(initialBalance: number) {
+    this.balance = initialBalance;
+  }
+
+  deposit(amount: number): void {
+    this.balance += amount;
+  }
+
+  getBalance(): number {
+    return this.balance; // Accessing private data safely
+  }
+}
+
+const account = new BankAccount(1000);
+account.deposit(500);
+console.log(account.getBalance()); // ✅ Output: 1500
+// console.log(account.balance); ❌ Error: 'balance' is private
+  
+```
+- private balance → Cannot be accessed directly.
+- getBalance() → Safely retrieves the balance.
+
+**2️. Inheritance (Code Reusability)**
+
+- Inheritance allows one class to acquire properties & behaviors of another class.
+- Reduces code duplication
+- Promotes reusability
+```
+class Animal {
+  constructor(public name: string) {}
+
+  makeSound(): void {
+    console.log("Some generic sound...");
+  }
+}
+
+class Dog extends Animal {
+  makeSound(): void {
+    console.log("Woof Woof!"); // Overriding method
+  }
+}
+
+const myDog = new Dog("Buddy");
+myDog.makeSound(); // ✅ Output: Woof Woof!
+
+```
+- extends → Dog class inherits properties/methods of Animal.
+-  Method Overriding → Dog modifies the behavior of makeSound().
+
+**3. Polymorphism (One Interface, Many Forms)**
+
+- Polymorphism allows a single function or method to have different implementations based on the context.
+- Reduces complexity
+- Increases flexibility
+```
+class Shape {
+  calculateArea(): void {
+    console.log("Calculating area...");
+  }
+}
+
+class Circle extends Shape {
+  constructor(private radius: number) {
+    super();
+  }
+
+  calculateArea(): void {
+    console.log(`Circle Area: ${Math.PI * this.radius * this.radius}`);
+  }
+}
+
+const shape1: Shape = new Circle(5);
+shape1.calculateArea(); // ✅ Output: Circle Area: 78.5
+
+```
+- Method Overriding → Child class provides its own version of calculateArea().
+- Same interface (Shape), different implementations (Circle, Rectangle, etc.).
+
+**4. Abstraction (Hiding Implementation Details)**
+
+- Abstraction hides complex implementation and only exposes essential features.
+- Simplifies code readability
+- Enhances security by hiding unnecessary details
+
+```
+abstract class Vehicle {
+  constructor(public brand: string) {}
+
+  abstract move(): void; // Must be implemented by subclasses
+}
+
+class Car extends Vehicle {
+  move(): void {
+    console.log(`${this.brand} car is moving...`);
+  }
+}
+
+const myCar = new Car("Toyota");
+myCar.move(); // ✅ Output: Toyota car is moving...
+
+
+```
+- Abstract classes cannot be instantiated directly.
+- Abstract methods must be implemented in child classes.
+
+
 ### Declaring a Class in TypeScript
 
 A class is defined using the class keyword and can contain properties, methods, and a constructor.
