@@ -903,5 +903,233 @@ remote.pressButton(); // ✅ Light is ON
 
 ```
 
+## Classes in TypeScript – A Complete Guide
 
+In TypeScript, a class is a blueprint for creating objects with properties and methods. It supports OOP concepts like encapsulation, inheritance, and polymorphism while also adding type safety.
+
+### Declaring a Class in TypeScript
+
+A class is defined using the class keyword and can contain properties, methods, and a constructor.
+
+```
+class Person {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet(): void {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+  }
+}
+
+const person1 = new Person("John", 25);
+person1.greet(); // Output: Hello, my name is John and I am 25 years old.
+
+```
+
+- name and age → Class properties
+- constructor() → Initializes properties when creating an object
+- greet() → Method inside the class
+
+### Access Modifiers (Encapsulation) in TypeScript
+
+Access modifiers define the visibility of class members. There are three types:
+
+public	- Accessible anywhere (default modifier)
+private - Accessible only inside the class
+protected - Accessible within the class and its subclasses
+
+**Using Access Modifiers**
+
+```
+class Employee {
+  public name: string; // Accessible anywhere
+  private salary: number; // Only accessible inside the class
+  protected department: string; // Accessible inside the class & subclasses
+
+  constructor(name: string, salary: number, department: string) {
+    this.name = name;
+    this.salary = salary;
+    this.department = department;
+  }
+
+  public getSalary(): number {
+    return this.salary; // Accessible inside class
+  }
+}
+
+class Manager extends Employee {
+  getDepartment(): string {
+    return this.department; // ✅ Allowed (protected members are accessible in subclasses)
+  }
+}
+
+const emp = new Employee("Alice", 50000, "IT");
+console.log(emp.name); // ✅ Accessible (public)
+console.log(emp.getSalary()); // ✅ Accessible via public method
+// console.log(emp.salary); ❌ Error (private members can't be accessed outside the class)
+
+```
+
+- public → Can be accessed anywhere
+- private → Cannot be accessed outside the class
+- protected → Can be accessed in the class and its child classes
+
+### Readonly & Static Members in TypeScript
+
+Prevents modification after initialization (used for constants).
+
+```
+class Company {
+  readonly companyName: string = "TechCorp";
+  constructor(name: string) {
+    this.companyName = name;
+  }
+}
+
+const c = new Company("InnovateX");
+console.log(c.companyName); // ✅ Allowed
+// c.companyName = "NewCorp"; ❌ Error: Cannot assign to 'companyName' because it is a read-only property.
+
+```
+### static Modifier
+
+Belongs to the class itself, not an instance.
+
+```
+class MathUtils {
+  static PI: number = 3.14;
+
+  static circleArea(radius: number): number {
+    return this.PI * radius * radius;
+  }
+}
+
+console.log(MathUtils.PI); // ✅ Access without creating an instance
+console.log(MathUtils.circleArea(5)); // Output: 78.5
+```
+
+### Getters & Setters in TypeScript
+
+Encapsulates data and controls access using getter & setter methods.
+
+```
+class Product {
+  private _price: number = 0;
+
+  get price(): number {
+    return this._price;
+  }
+
+  set price(value: number) {
+    if (value < 0) {
+      console.log("Price cannot be negative");
+    } else {
+      this._price = value;
+    }
+  }
+}
+
+const item = new Product();
+item.price = 50; // ✅ Setter called
+console.log(item.price); // ✅ Getter called, Output: 50
+item.price = -10; // ❌ Error: Price cannot be negative
+
+
+```
+- get → Retrieves the value
+- set → Validates & modifies the value
+
+### Inheritance in TypeScript (Extending Classes)
+
+Allows a class to inherit properties & methods from another class using extends.
+
+```
+class Animal {
+  constructor(public name: string) {}
+
+  makeSound(): void {
+    console.log("Some generic sound");
+  }
+}
+
+class Dog extends Animal {
+  constructor(name: string, public breed: string) {
+    super(name); // Call the parent class constructor
+  }
+
+  makeSound(): void {
+    console.log("Woof Woof!"); // Overriding the method
+  }
+}
+
+const myDog = new Dog("Buddy", "Golden Retriever");
+console.log(myDog.name); // ✅ Output: Buddy
+myDog.makeSound(); // ✅ Output: Woof Woof!
+
+
+```
+- super(name) → Calls the parent class constructor
+- Methods can be overridden in child classes
+
+### Abstract Classes in TypeScript
+
+- Cannot be instantiated directly
+- Used as a base class for other classes
+- Can have abstract methods (must be implemented by subclasses)
+
+```
+abstract class Vehicle {
+  constructor(public brand: string) {}
+
+  abstract move(): void; // Abstract method (must be implemented in subclass)
+}
+
+class Car extends Vehicle {
+  move(): void {
+    console.log(`${this.brand} car is moving`);
+  }
+}
+
+const myCar = new Car("Toyota");
+myCar.move(); // ✅ Output: Toyota car is moving
+// const v = new Vehicle("Bike"); ❌ Error: Cannot create an instance of an abstract class
+
+```
+- abstract move() → Must be implemented in the child class
+
+### Interfaces vs Classes in TypeScript
+
+| Feature | Interface |  Class|
+| -------- | --------- | --------------|
+|  Purpose  |  Defines a structure	 |  Defines a blueprint with behavior |
+|  Implementation  | Cannot have implementation	 | Can have methods & properties |
+|  Instantiation  |  Not instantiable	 | Can create objects |
+|  Usage  | Used for type-checking	 | Used for object creation |
+
+
+```
+interface AnimalInterface {
+  name: string;
+  makeSound(): void;
+}
+
+class Cat implements AnimalInterface {
+  constructor(public name: string) {}
+
+  makeSound(): void {
+    console.log("Meow!");
+  }
+}
+
+const myCat = new Cat("Whiskers");
+myCat.makeSound(); // Output: Meow!
+
+```
+- Interfaces define a structure but do not provide implementation
+- Classes can implement multiple interfaces
 
