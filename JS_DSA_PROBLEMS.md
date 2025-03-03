@@ -116,4 +116,78 @@ const flat = flatArray([1, 2, [3, 4]], 2);
 
 ```
 
+#### 4. Split in to small Chunk Arrays from large Array
 
+```
+Example 1 : input [1,2,3,4,5,6,7] , 3 // [[1,2,3], [4,5,6], [7]]
+Example 2 : input [1,2,3,4,5,6] , 2 // [ [1,2], [3,4] ,[5,6] ]
+
+Approach 1:
+   1. Create an empty result array,
+   2. Iterate input element and clone values as per the input and push those values to result as array
+   3. Check the logic of how to get the start-index and end-index to clone the values in each iteration
+
+function chunkArray (input, size) {
+   const result = [];
+   for(let i=0; i<input.length; i++) {
+      const tempArray = input.slice(i*size, size + i*size);
+     if(tempArray.length > 0) {
+         result.push(tempArray);
+     }
+   }
+   console.log(result);
+}
+
+chunkArray([1,2,3,4,5,6,7] , 3)
+```
+
+#### 5. Rotate an Array "K" times
+
+```
+Example 1: [1,2,3,4,5,6] , 2 times - [5,6,1,2,3,4]
+Example 1: [1,2,3,4,5,6] , 4 times - [3,4,5,6,1,2]
+
+Approach 1: (Brut force approach using inbuilt methods)
+   1. Using pop() will help remove last element, unshift() will use insert in to start of an array
+   2. We can use both of these methods first remove the last element and push that same element to start of the array
+   3. Like input.unshift(input.pop()) "n" times, so the element moved as expectedly
+
+const rotateArrayNtimes = function (array, ntimes) {
+  for (let i = 0; i < ntimes; i++) {
+    array.unshift(array.pop());
+  }
+  console.log(array);
+};
+rotateArrayNtimes([1, 2, 3, 4, 5, 6], 3); // [4,5,6,1,2,3]
+
+
+Approach 2:
+   1. Iterate elements and shift the position of the elements to start of the array by checking n times
+
+function rotateArray(input, ktime) {
+   const result = [];
+   const N = input.length;
+   const K = times;
+
+// Logic
+   // input = [0, 1, 2, 3, 4, 5];
+  // i =0 ;  input[N - K + i] // 6-3+0 = input[3] =[3]
+  // i =1 ;  input[N - K + i] // 6-3+1 = input[4] =[3, 4]
+  // i =2 ;  input[N - K + i] // 6-3+2 = input[5] =[3, 4, 5]
+
+ // i = 3 ; input [i-K] // 3 - 3 = input[0] = [3,4,5,0];
+ // i = 4 ; input [i-K] // 4 - 3 = input[1] = [3,4,5,0,1];
+ // i = 5 ; input [i-K] // 5 - 3 = input[2] = [3,4,5,0,1,2]; 
+
+   for(let i =0 ; i <input.length ; i++) {
+      if(i< K) {
+         result[i] = input[N - K + i] 
+      }else{
+          result[i] = input[i - K]
+      }
+   }
+
+   return result;
+}
+ 
+```
