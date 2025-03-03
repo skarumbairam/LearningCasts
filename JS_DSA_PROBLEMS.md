@@ -73,12 +73,13 @@ function isAnagram (s,t) {
 console.log(isAnagram("ABC", "CAB")); // true;
 ```
 
-#### 2. Flattening an Array to 'n' depth
+#### 3. Flattening an Array to 'n' depth
 
 ```
- Approach 1 :
-  1. Check if any array of element is an array and iterate them until it is spread to element
-  2. Spread them using the ...Operator
+ Approach 1 : (Using Array's inbuilt methods) 
+
+  1. Check if the input element has array values, using some(Array.isArray) using inbuilt method utill flat evey element 
+  2. Use the flat method to get the flat result.flat(1)
 
 function flatteningArray (input, depth=1) {
 
@@ -109,6 +110,7 @@ function flatArray(arr, depth = 1) {
   }
   return result;
 }
+
 console.log("Flatt arr", flatArray([1, 2, [3, [4]]]) );
 const flat = flatArray([1, 2, [3, 4]], 2);
 
