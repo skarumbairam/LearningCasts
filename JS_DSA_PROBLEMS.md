@@ -191,3 +191,53 @@ function rotateArray(input, ktime) {
 }
  
 ```
+
+#### 6. Flattern Object of nested one
+
+```
+Approach 1 :
+ const user = {
+   family: {
+      "daddy": "Senthil",
+      "mom": "Hema",
+      "children": {
+         "son": "Havish",
+         "daughter": "Dharani"
+      }
+   }
+}
+
+Expected Output 1:
+{
+ "user.family.daddy" : "Senthil"
+ "user.family.mom" : "Hema",
+ "user.family.children.son": "Havish",
+ "user.family.children.daughter": "Dharani",
+}
+
+Output 2:
+{
+ "family.daddy": "Senthil"
+ "family.mom": "Hema",
+ "family.children.son": "Havish",
+ "family.children.daughter": "Dharani",
+}
+
+
+function flattern (obj, parentkey) {
+      for(let key in obj) {
+         const newParent = parentkey + '.' + key;
+
+          //const newParent = parentkey + key; for out put 2
+
+         if( typeof obj[key] === "object") {
+               flattern(obj[key], newParent);
+         }else{
+            result[newParent] = obj[key];
+         }
+      }
+}
+
+flattern(userObj, "user");
+
+```
