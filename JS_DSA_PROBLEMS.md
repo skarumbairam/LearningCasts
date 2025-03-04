@@ -241,3 +241,87 @@ function flattern (obj, parentkey) {
 flattern(userObj, "user");
 
 ```
+
+#### 7. Memoization example in javascript
+
+```
+function memoized (cbFn, context) {
+  const result = {};
+  return function (...args) {
+    const cacheArgs = JSON.stringify(args);
+    
+    if(!result[cacheArgs]){
+      result[cacheArgs] = cbFn.call(context || this, ...args);
+    }
+    console.log(result);
+    return result[cacheArgs];
+  }
+};
+
+function product (a, b) {
+  for(let i=0; i<10000000; i++){};
+  return a * b;
+}
+
+
+const calculateMemoized = memoized(product)
+
+console.time("First Call");
+calculateMemoized(23, 10);
+console.timeEnd("First Call");
+
+console.time("Second Call");
+calculateMemoized(23, 10);
+console.timeEnd("Second Call");
+
+```
+
+#### 8. Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.
+```
+Input: words = ["bella","label","roller"]
+Output: ["e","l","l"]
+
+
+const commonChars = (arr) => {
+  const map = [];
+  const result = [];
+
+// Generate Frequesncy of each word's letter
+  function frequency (word) {
+    const obj = {};
+    for(let i=0 ; i<word.length;i++) {
+      const tempKey = word[i];
+      
+      if(obj.hasOwnProperty(tempKey)) {
+        obj[tempKey] ++;
+      }else{
+        obj[tempKey] = 1;
+      }
+    }
+    return obj;
+  }
+
+// Push frequency to array
+  for(let el of arr) {
+    const frequencyCountObj = frequency(el);
+    map.push(frequencyCountObj);
+  }
+  
+   console.log(map)
+
+// Take first word, check each letter exist inside frequency object
+  for(let char of arr[0] ){
+   const checkLetterExist = map.every( word => (word[char]) ) // When condition matches true push that charecter to result array
+     if(checkLetterExist)  {
+       result.push(char)
+     }
+  }
+    console.log(result)
+}
+
+commonChars(arr);
+
+```
+
+
+
