@@ -444,3 +444,28 @@ longestCommonPrefix(strs);
 ```
 #### 12. Longest Common Subsequence (Leet Code : 1143) 
 
+```
+var longestCommonSubstring = function (strs) {
+   let base = strs.reduce((a, b) => a.length <= b.length ? a : b);
+   let longestCommon = '';
+   
+   for(let i=0; i<base.length ; i++){
+     for(let j=i+1; j<=base.length; j++){
+       let substring = base.slice(i, j);
+       
+       const checkStrIncludes = strs.every(str => str.includes(substring));
+        // Check if substring exists in all other strings
+      if (checkStrIncludes) {
+        if (substring.length > longestCommon.length) {
+          longestCommon = substring;
+        }
+      }
+     }
+   }
+    console.log("longestCommon", longestCommon)
+};
+
+const strings = ["frontenddeveloper", "backenddeveloper", "fullstackdeveloper"];
+longestCommonSubstring(strings);
+
+```
