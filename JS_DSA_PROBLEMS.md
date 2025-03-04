@@ -245,6 +245,14 @@ flattern(userObj, "user");
 #### 7. Memoization example in javascript
 
 ```
+
+Approach 1:
+
+   1. Lets create a heavy calculation function "product" which accepts arguments
+   2. Create memoize function which will accept the product funciton as arguments
+   3. Create obj push function arguments as key and result of the function as value
+   4. When next time executing same function will check the same params as key in the object, if yes return quickly from object instead calculating
+
 function memoized (cbFn, context) {
   const result = {};
   return function (...args) {
@@ -276,7 +284,7 @@ console.timeEnd("Second Call");
 
 ```
 
-#### 8. Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.
+#### 8. Given a string array of words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. (Leet Code 1002)
 ```
 Input: words = ["bella","label","roller"]
 Output: ["e","l","l"]
@@ -322,6 +330,117 @@ const commonChars = (arr) => {
 commonChars(arr);
 
 ```
+#### 9. Best Time to Buy and Sell Stock (Leet Code : 121)
 
+```
+function maxProfit () {
+   const prices = [7,1,3,5,8,9]
+   let maxProfit = 0;
+   for( let i= 0 ; i <prices.length ; i++){
+      for(let j = i+1; j<prices.length; j++){
+         const currProfit = prices[j] - prices[i];
+         maxProfit = Math.max(maxProfit, currProfit);
+      }
+   }
+   console.log(maxProfit);
+   return maxProfit;
+}
+```
 
+#### 10. Find All Duplicates in an Array (Leet Code : 442) 
+
+```
+function findAllDuplicates () {
+   const input = [4,3,2,7,8,2,3,1]
+   let result = [];
+   
+   for( let i= 0 ; i <input.length ; i++){
+      const currEl = input[i]
+      if(input.lastIndexOf(currEl) !== i){
+        result.push(currEl);
+      }
+   }
+ console.log(result);
+}
+
+findAllDuplicates();
+
+```
+
+#### 11. Max Sub Array (Leet Code : 53) 
+
+```
+// Approach 1: 
+
+function maxSubArray () {
+   const input = [-2,1,-3,4,-1,2,1,-5,4]
+   let maxVal = 0;
+   
+   for( let i= 0 ; i <input.length ; i++){
+      let currSum=0;
+     
+      for(let j=i+1; j<input.length; j++){
+        currSum = currSum + input[j];
+        maxVal = Math.max(maxVal, currSum);
+      }
+   }
+ console.log(maxVal);
+}
+
+maxSubArray();
+
+// Approach 2:
+
+const maxSubArr = function () {
+
+  const input = [-2,1,-3,4,-1,2,1,-5,4]
+  let maxSum = 0;
+
+  // optional
+  let startIndex = 0;
+  let lastIndex = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    let currentMax = 0;
+    for (j = i; j < array.length; j++) {
+      currentMax = currentMax + array[j];
+      if (currentMax > maxSum) {
+        maxSum = currentMax;
+        startIndex = i;
+        lastIndex = j;
+      }
+    }
+  }
+}
+
+// We can slice if needed the elements of max sum
+maxSubArr()
+```
+
+#### 12. Longest Common Prefix (Leet Code : 14) 
+
+```
+var longestCommonPrefix = function (strs) {
+  let prefix = strs[0];
+
+  if (strs.length === 0) {
+    return "";
+  }
+
+  for (const word of strs) {
+    while (word.indexOf(prefix) !== 0) {
+      prefix = prefix.substring(0, prefix.length - 1);
+      if (prefix === "") {
+        return "";
+      }
+    }
+  }
+  console.log(prefix);
+};
+
+var strs = ["flower", "flow", "flight"];
+longestCommonPrefix(strs);
+
+```
+#### 12. Longest Common Subsequence (Leet Code : 1143) 
 
