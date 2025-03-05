@@ -1,3 +1,162 @@
+#### Searching Algorithm 
+
+##### 1. Linear Search 
+```
+const input = [1,5,7,8,11,3,6]; 
+target = 11;
+function linearSearch (input, target) {
+   for(let i=0; i<input.length; i++) {
+      if(input[i]=== target) {
+         return i;
+      }
+   }
+   return -1;
+}
+linearSearch(input, target);
+
+// Global Linear Search
+
+function globalLinearSearch (input, target) {
+   const result = [];
+   for(let i=0; i<input.length; i++) {
+      if(input[i]=== target) {
+         result.push(i);
+      }
+   }
+
+   if(result.length > 0) return result;
+   return -1;
+}
+
+// O(n) Complexity 
+// O(1) / O(n) Space Complexity 
+```
+
+##### 2. Binary Search 
+<sup> ** </sup> Binary Search can only for sorted Array of elements.
+
+```
+function binarySearch (array, target) {
+
+   let start = 0;
+   let end = array.length;
+   let input = array.sort((a,b) => a-b);
+   console.log(input);
+   
+   while(start <= end) {
+      const mid = Math.floor((start+end)*0.5); 
+      if(input[mid] === target) {
+         return mid;
+      }else if(input[mid] < target) {
+         start = mid +1;
+      } else {
+         end = mid - 1;
+      }
+   }
+   return -1;
+}
+
+const input = [1,3,5,6,8,11]; 
+target = 5;
+
+console.log("Index is ::", binarySearch(input, target));
+
+// O log(n) Complexity 
+// O(1) Space Complexity 
+
+```
+
+#### Sorting Algorithms 
+
+##### 1. Bubbule Sort 
+- Concept of bubble sort is take two elements at a time and compare it which one smaller 
+- And swap them the position based the value
+- Important note is inner loop condition (length - 1 - i)
+
+```
+   function bubbleSort (input) {
+      const n = input.length;
+      for(let i=0 ; i< n; i++){
+         for(let j=0; j<n-1-i; j++) {
+            if(input[j] > input [j+1]){
+                  [input[j], input[j+1]] = [input[j+1], input[j]]
+            }
+         }
+      }
+      console.log(input);
+   }
+
+const input = [0,1,2,-2,-1,5]
+bubbleSort(input);
+
+- Time Complexity O(n^2)
+- Space Complexity O(1)
+```
+
+##### 2. Selection Sort
+
+- Select one element compare with all other elements 
+- And then find small elements and swap to the position
+```
+function selectionSort (input) {
+   const n = input.length;
+   for(let i=0 ; i<n ; i++){
+      let currMinIndex = i;
+      for(let j = i+1; j< n; j++){
+         if(input[j] < input[currMinIndex]) {
+            currMinIndex = j;
+         }
+      }
+      
+      if(currMinIndex !==i ){
+         [input[i], input[currMinIndex]] = [input[currMinIndex], input[i]]
+      }
+   }
+   console.log(input)
+}
+const input = [0,55,1,4,50,34,3]
+selectionSort(input);
+
+const input = [0,1,2,-2,-1,5]
+selectionSort(input);
+
+- Time Complexity O(n^2)
+- Space Complexity O(1)
+
+```
+
+##### 3. Insertion Sort
+
+- Slect portion of array and sort them 
+- Start from 1th position so that we will have portion of array (0,1)
+- In the next iteration we can compare (0,1,2) backwards
+```
+
+function insertionSort (input) {
+   const n = input.length;
+
+   for(let i=1; i< n; i++){
+      const key = input[i];
+      let j = i - 1; // Previous value
+      while(j>=0 && input[j] > key) {
+         input[j+1] = input[j];
+         j--;
+      }
+      input[j+1] = key;
+   }
+   console.log(input)
+}
+const input = [-5, 0,1,2,-2,-1,-3, 1,99]
+insertionSort(input);
+
+```
+##### 4. Merge Sort
+
+```
+TO DO
+```
+
+
 #### 1. "Contains Duplicate" - Given an integer array nums, return true if any value appears more than once in the array, otherwise return false. Input: nums = [1, 2, 3, 3]
 
 ```
@@ -467,5 +626,35 @@ var longestCommonSubstring = function (strs) {
 
 const strings = ["frontenddeveloper", "backenddeveloper", "fullstackdeveloper"];
 longestCommonSubstring(strings);
+
+```
+#### 13. Maximum Count of Positive Integer and Negative Integer (Leet code : 2529)
+
+```
+   function maxCountPositiveNegativeInteger (array) {
+  
+  const positiveResult = [];
+  const nagativeResult = [];
+  
+  for(let i=0 ; i< array.length ; i++){
+    if(array[i] > 0) {
+      positiveResult.push(array[i])
+    }
+    
+    if(array[i] < 0) {
+      nagativeResult.push(array[i])
+    }
+  }
+  
+  const result = Math.max(positiveResult.length, nagativeResult.length);
+  
+  console.log(result);
+  return result;
+  
+  
+}
+
+const input = [-2,-1,-1,1,2,3] 
+maxCountPositiveNegativeInteger(input);
 
 ```
