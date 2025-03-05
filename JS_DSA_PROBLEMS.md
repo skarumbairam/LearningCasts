@@ -68,6 +68,8 @@ console.log("Index is ::", binarySearch(input, target));
 
 #### Sorting Algorithms 
 
+Reference & Animaiton : https://visualgo.net/en/sorting
+
 ##### 1. Bubbule Sort 
 - Concept of bubble sort is take two elements at a time and compare it which one smaller 
 - And swap them the position based the value
@@ -127,9 +129,9 @@ selectionSort(input);
 
 ##### 3. Insertion Sort
 
-- Slect portion of array and sort them 
-- Start from 1th position so that we will have portion of array (0,1)
-- In the next iteration we can compare (0,1,2) backwards
+- Select a portion ofthe  array and sort them 
+- Start from 1st position so that we will have a portion of the array (0,1)
+- In the next iteration, we can compare (0,1,2) backwards
 ```
 
 function insertionSort (input) {
