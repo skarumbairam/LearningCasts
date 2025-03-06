@@ -766,6 +766,18 @@ parent.addEventListener('click', function(event) {
 - 🔹 Optimize API Calls → Debounce & throttle unnecessary requests
 - 🔹 Use WebSockets for Real-time Updates → Reduce polling overhead
 
+Memcached and Redis are both open-source in-memory data stores that offer high performance. Memcached is better for basic caching needs, while Redis is better for complex data models
+
+### Memcached vs Redis
+
+| Memcached | Redis |
+| ---------- | -----------|
+|Simple, multi-threaded architecture | Advanced key-value store, complex data structures |
+| High-throughput, string-based caching | Session management, real-time data operations |
+|Key-value objects | Strings, lists, sets, hashes, sorted sets, bitmaps, and more |
+
+
+
 ### React Profilor 
 
 React Profiler is a tool provided within React DevTools that helps analyze the performance of your React application. It allows you to measure the rendering time of each component, track unnecessary re-renders, and identify performance bottlenecks at the component level.
