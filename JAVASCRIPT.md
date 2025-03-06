@@ -1064,9 +1064,9 @@ Security is a critical concern in web application development. Web applications 
 
 **HTML5 introduced:**
 
-- Semantic Elements → <header>, <footer>, <article>, <section>, <aside>
-- Multimedia Support → <audio>, <video>
-- Canvas & SVG → <canvas> for 2D graphics
+- Semantic Elements → header, footer, nav, article, section, aside
+- Multimedia Support → audio, video
+- Canvas & SVG → canvas for 2D graphics
 - Form Enhancements → New input types (email, number, date)
 - Web Storage → localStorage & sessionStorage
 - WebSockets → For real-time communication
@@ -1134,13 +1134,19 @@ The CSS Box Model describes how elements are structured in a web page. It consis
 
 ### What is PWA ?
 
-A Progressive Web App (PWA) is a web application that provides a native app-like experience using modern web technologies. It can work offline, load fast, and be installable like a mobile app.
+A Progressive Web App (PWA) is a web application that provides a native app-like experience using modern web technologies. Its basically hybrid approach for building native apps and web apps, It can work offline, load fast, and be installable like a mobile app.
+
+- We have next-pwa package for next.js
+- Generate a Manifest for PWA. It contains a name, URL, short name, description, icons etc.. basically metadata of applications
+- link the manifest json in to index.html head element "<link rel="manifest" path="/manifest.json" />"
+- Service workers cache the resources
+- In the Browser index DB we can sync data for offline support
 
 PWAs are lighter than native apps (no large downloads).
 
 No need to build separate iOS & Android apps.
 
-Works on mobile, tablet, and desktop without extra development.
+Works on mobile, tablet, and desktop without extra development. Before making PWA need to generate repports from Lighthouse by browser dev tools and fix any issues.
 
 ✔ A single codebase for all platforms (Android, iOS, Windows, Mac).
 
