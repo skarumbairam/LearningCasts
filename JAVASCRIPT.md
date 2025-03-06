@@ -832,8 +832,59 @@ const App = () => (
 ```
 
 ### Error Boundaries in React:
+
+- An error boundary is a special component that lets you display some fallback UI instead of the part that crashed—for example, an error message.
 - React Error Boundaries are components that help catch JavaScript errors anywhere in a component tree and log those errors, and optionally display a fallback UI to the user.
 - You can use the react-error-boundary library for this purpose, but React's built-in error boundaries do not require an external library.
+- There is currently no way to write an error boundary as a function component. However, you don’t have to write the error boundary class yourself. For example, you can use react-error-boundary instead.
+
+```
+import * as React from 'react';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    logErrorToMyService(
+      error,
+      // Example "componentStack":
+      //   in ComponentThatThrows (created by App)
+      //   in ErrorBoundary (created by App)
+      //   in div (created by App)
+      //   in App
+      info.componentStack,
+      // Only available in react@canary.
+      // Warning: Owner Stack is not available in production.
+      React.captureOwnerStack(),
+    );
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
+
+```
+Then you can wrap a part of your component tree with it:
+
+```
+<ErrorBoundary fallback={<p>Something went wrong</p>}>
+  <Profile />
+</ErrorBoundary>
+```
 
 ### The Core Web Vitals are:
 
