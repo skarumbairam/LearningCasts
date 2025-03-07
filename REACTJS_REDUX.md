@@ -1292,6 +1292,22 @@ Next.js provides a set of utilities to handle the request and response inside th
 - For dynamic content, you can use getStaticProps with getStaticPaths for static generation or getServerSideProps for server-side rendering.
 - Dynamic routes in Next.js enable you to build flexible, data-driven applications where the URL path is dynamically determined and content can be fetched based on the URL parameters.
 
+## what is serverless computing
+Serverless is a cloud computing model that allows developers to build and run applications without managing servers. The cloud service provider (CSP) manages the infrastructure that runs the application code. 
+
+Serverless is a cloud-native development model that allows developers to build and run applications without having to manage servers. The term “serverless” doesn’t mean there are no servers. It means the servers are abstracted away from application development. A cloud provider handles the routine work of provisioning, maintaining, and scaling the server infrastructure. 
+
+- Developers write code and package it into containers
+- The CSP provisions, scales, and maintains the infrastructure
+- Serverless apps automatically scale up or down based on demand
+- Developers pay only for the resources they use
+
+- Developers can focus on business logic
+- Applications can be more cost-effective and efficient
+- Applications can scale to meet business demand
+
+Examples of serverless computing AWS Lambda, Google Cloud, and Microsoft Azure. 
+
 # ======= DEV OPS ===================
 
 What is DevOps?
