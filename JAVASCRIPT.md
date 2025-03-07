@@ -271,7 +271,7 @@ executeOperation();
 
 ## What are promise APIs?
  
-**Promise.all()** is used to execute multiple promises in parallel and wait for all of them to settle (either resolve or reject).
+**Promise.all()** is used to execute multiple promises in parallel and wait for all of them to resolve  ( settle - either resolve or reject).
 
 It takes an array of promises as an argument and returns a single promise that resolves when all promises in the array have resolved, or rejects if any one of them fails.
 
