@@ -55,6 +55,7 @@ const Board = () => {
   const checkWinner = () => {
     winnerPattern.forEach((currPattern) => {
       const currentPlayer = square[currPattern[0]];
+
       if (currentPlayer === "") return;
       let winnerFound = true;
       currPattern.forEach((el) => {
