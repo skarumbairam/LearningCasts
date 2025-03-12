@@ -322,7 +322,7 @@ const rotateArrayNtimes = function (array, ntimes) {
 rotateArrayNtimes([1, 2, 3, 4, 5, 6], 3); // [4,5,6,1,2,3]
 
 const rotateArrayNtimes1 = function (inputArr3, k) {
-  console.log("Array Rotation N times Approach 2");
+  console.log("Array Rotation  times Approach 2");
   const result = [];
   const n = inputArr3.length;
   for (let i = 0; i < n; i++) {
@@ -341,7 +341,6 @@ rotateArrayNtimes1([1, 2, 3, 4, 5, 6], 3);
 
 function objectRecurssive() {
   const resultObj = {};
-
   const user = {
     name: "Senthilkumar",
     details: {
@@ -371,7 +370,20 @@ function objectRecurssive() {
   console.log(resultObj);
 }
 
-
+function flatObj(obj) {
+  let result = {};
+ for(const i in obj){
+   if(typeof obj[i] === "object"){
+     const temp = flatObj(obj[i]);
+     for(let j in temp) {
+       result[i+'.'+j] = temp[j];
+     }
+   }else{
+     result[i] = obj[i];
+   }
+ }
+ return result;
+}
 
 
 // 16 Get second largest value from array

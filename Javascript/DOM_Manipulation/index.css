@@ -1,0 +1,117 @@
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+span,
+a,
+button,
+div {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 2em;
+  border: 1px solid red;
+}
+.sorting-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+input,
+button {
+  padding: 10px;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.products-container,
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  padding: 10px;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: antiquewhite;
+  border: 1px solid red;
+  margin: 5px;
+}
+.product .title {
+  font-size: 12px;
+  padding: 5px;
+  text-align: center;
+  min-height: 40px;
+}
+
+.product .price {
+  font-size: 15px;
+  padding: 5px;
+  min-height: 15px;
+}
+
+.products-container .product-image {
+  max-width: 100px;
+  height: 100px;
+  padding: 10px;
+  object-fit: contain;
+}
+
+.products .product-image {
+  max-width: 100px;
+  height: 100px;
+  padding: 10px;
+  object-fit: contain;
+}
+
+.cart-btn {
+  padding: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.space {
+  padding: 2px;
+  margin: 2px;
+}
+.strike {
+  text-decoration: line-through;
+}
+
+/* */
+
+.list-item {
+  display: flex;
+  min-width: 200px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aqua;
+  margin: 2px;
+  padding: 5px;
+}
+
+/*
+
+*/
+
+.square {
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+}
