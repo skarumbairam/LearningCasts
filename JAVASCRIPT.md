@@ -888,6 +888,8 @@ Then you can wrap a part of your component tree with it:
 
 ### The Core Web Vitals are:
 
+Core Web Vitals are a set of metrics that measure how well a website performs. These metrics are used by Google to rank websites in search results. 
+
 - Gives a better user experience
 - Best SEO ranking
 - Standardize performance matrices 
