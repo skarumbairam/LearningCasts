@@ -408,6 +408,29 @@ Promise.any([p1, p2])
 Output : [ '❌ Promise 1 rejected', '❌ Promise 2 rejected' ]
 ```
 
+## Convert callback chaining to async and await 
+
+```
+ function asyncTask() {
+      return functionA()
+          .then((valueA) => functionB(valueA))
+          .then((valueB) => functionC(valueB))
+          .then((valueC) => functionD(valueC))
+          .catch((err) => logger.error(err))
+  }
+
+  async function asyncTask () {
+    try{
+      const valueA = await function A();
+     const valueB = await function B(valueA);
+     const valueC = await function C(valueB);
+     return await functionD(valueC);
+    }catch (err) {
+      logger.error(err))
+    }
+  }
+```
+
 
 ## What is event loop in javascript?
 
