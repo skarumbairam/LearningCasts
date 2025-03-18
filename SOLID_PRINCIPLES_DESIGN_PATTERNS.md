@@ -1250,3 +1250,239 @@ myCat.makeSound(); // Output: Meow!
 - Interfaces define a structure but do not provide implementation
 - Classes can implement multiple interfaces
 
+
+## Typescript 
+JavaScript is a loosely typed language, meaning variables can hold any type of value without strict enforcement. TypeScript, built on top of JavaScript, introduces static type-checking, which helps catch errors during development. It enforces type discipline, improving code quality, maintainability, and reducing runtime errors. TypeScript enforces type safety at compile-time.
+
+### Basic types 
+```
+// Primitive types
+let num: number = 10;
+const name: string = "karumbairam"
+const isAudult: boolean = false;
+
+// Array
+const products: string [] = ["Shirt", "Pant", "Watches"];
+const price: number [] = [500, 200, 300];
+
+//Union Types
+
+const productAndPrice : (numbers | string) [] = ["Shirt", "Pant", "Watches", 500, 200, 300]
+// or
+const productAndPrice: Array<number | string> = ["Shirt", "Pant", "Watches", 500, 200, 300];
+
+// Object
+
+let person: { name: string; age: number } = { name: "Alice", age: 25 };
+
+// Function
+function greet(): string {
+  return "Hello!";
+}
+console.log(typeof greet); // "function"
+
+
+// Date
+
+let today: Date = new Date();
+console.log(typeof today);
+
+// Regx
+let pattern: RegExp = /\d+/; // Matches numbers
+console.log(typeof pattern);
+
+// Map
+
+let userMap: Map<number, string> = new Map();
+userMap.set(1, "John");
+console.log(typeof userMap); // "object"
+
+// Set
+
+let uniqueNumbers: Set<number> = new Set([1, 2, 3, 1, 2]);
+console.log(uniqueNumbers.size); // 3 (Duplicates are removed)
+
+
+```
+
+### TypeScript-Specific Enhancements
+
+In TypeScript, we can further improve type safety using custom types and interfaces.
+
+```
+// Custom types
+
+type Product = {
+  name: string;
+  price: number;
+};
+
+let item: Product = { name: "Laptop", price: 1000 };
+console.log(item);
+
+
+// Interface
+
+interface User {
+  name: string;
+  age: number;
+}
+
+let user: User = { name: "John Doe", age: 30 };
+console.log(user);
+
+
+```
+
+### Enumerations (enum)
+
+Defines named constants (numeric or string-based).
+
+```
+
+// Default enum
+  enum Direction {
+  Up,    // 0
+  Down,  // 1
+  Left,  // 2
+  Right  // 3
+}
+
+// 
+
+let move: Direction = Direction.Up;
+console.log(move); // 0
+
+// Custom Numeric Enum
+enum Status {
+  Success = 200,
+  NotFound = 404,
+  ServerError = 500,
+}
+
+console.log(Status.Success); // 200
+console.log(Status["NotFound"]); // 404
+
+// String Enum
+enum Role {
+  Admin = "ADMIN",
+  User = "USER",
+  Guest = "GUEST",
+}
+
+let userRole: Role = Role.User;
+console.log(userRole); // "USER"
+
+```
+
+### as (Type Assertions)
+
+The as keyword is used for Type Assertions, meaning we tell TypeScript what type we expect.
+
+```
+let someValue: unknown = "Hello, TypeScript!";
+let strLength: number = (someValue as string).length;
+
+console.log(strLength); // 17
+
+let inputElement = document.getElementById("username") as HTMLInputElement;
+inputElement.value = "John Doe"; // TypeScript knows it's an input element now
+
+```
+
+### any (Disables Type Checking)
+
+Using any removes strict type checking. Use cautiously.
+
+```
+let anything: any = "Hello";
+anything = 42; // No error!
+anything = true; // No error!
+
+// Use unknown instead of any when possible.
+```
+
+### unknown (Safer Alternative to any)
+
+Unlike any, unknown still requires type checking before usage.
+
+```
+let data: unknown = "Some text";
+
+if (typeof data === "string") {
+  console.log(data.toUpperCase()); // Works only after checking type
+}
+
+```
+
+### never (Function that Never Returns)
+
+A function that throws an error or runs forever is of type never.
+
+```
+function throwError(message: string): never {
+  throw new Error(message);
+}
+
+```
+
+### void (Function with No Return)
+
+A function that does not return anything should be marked as void.
+
+```
+function logMessage(message: string): void {
+  console.log(message);
+}
+
+```
+### readonly (Immutable Properties)
+
+Use readonly to prevent modifying object properties.
+
+```
+type User = {
+  readonly id: number;
+  name: string;
+};
+
+let user: User = { id: 1, name: "Alice" };
+// user.id = 2; // ❌ Error: Cannot assign to 'id' because it is a read-only property.
+
+
+```
+
+### tuple (Fixed-Length Array with Specific Types)
+A tuple is a special array where each element has a specific type and order.
+
+```
+let person: [string, number] = ["Alice", 25];
+// person = [25, "Alice"]; // ❌ Error: Type mismatch
+
+
+```
+
+### typeof (Extract Type from Variable)
+
+The typeof operator can be used to extract types dynamically.
+
+```
+let someString = "Hello";
+type StringType = typeof someString; // StringType = string
+
+
+```
+
+### keyof (Extract Keys from an Object)
+
+The keyof keyword extracts all keys of an object as a union type.
+
+```
+type User = { id: number; name: string };
+type UserKeys = keyof User; // "id" | "name"
+
+let key: UserKeys = "id"; // ✅ Works
+// let key: UserKeys = "email"; // ❌ Error: 'email' does not exist
+
+```
+
