@@ -1249,4 +1249,21 @@ Works on mobile, tablet, and desktop without extra development. Before making PW
 ✔ Example: Starbucks PWA is 99% smaller than its native app.
 
 
+## What is the design pattern used in Redux
+
+Singleton pattern can be considered the basics of global state management libraries such Redux or React Context. They can be accessed globally and acts as a single access point for accessing the global state.
+
+In Redux the State Tree uses the Singleton pattern and the connect method uses the Observer pattern.
+
+## Microservices vs Monolithic Architecture
+
+<img width="783" alt="Screenshot 2025-03-21 at 11 24 25 AM" src="https://github.com/user-attachments/assets/8f9f106a-9745-4429-91b3-6487318e5352" />
+
+## Rest API vs GraphQL
+
+<img width="690" alt="Screenshot 2025-03-21 at 11 25 21 AM" src="https://github.com/user-attachments/assets/e31a7b03-2e24-4174-b0f7-20ff1120ed35" />
+
+## params (Route Params) vs query (Query Params)
+
+<img width="688" alt="Screenshot 2025-03-21 at 11 28 14 AM" src="https://github.com/user-attachments/assets/0c7f68bc-fefb-4d85-975e-114b7f5c6b7d" />
 
