@@ -701,6 +701,11 @@ parent.addEventListener('click', function(event) {
 
 ## what is parameters, arguments & rest operators?
 
+arguments → old-school (collects all)
+rest → modern (collects remaining)
+spread → opposite of rest (expands elements)
+
+
 - Parameters: Variable in the function's declaration param1, param2
   
        ```
