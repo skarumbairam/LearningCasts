@@ -783,7 +783,7 @@ parent.addEventListener('click', function(event) {
 - 🔹 Use Indexing → Speed up searches
 - 🔹 Normalize & Denormalize Data Where Needed → Reduce joins & improve query performance
 - 🔹 Optimize Queries → Avoid SELECT *, fetch only required fields
-- 🔹 Use Connection Pooling → Reduce connection overhead
+- 🔹 Use Connection Pooling → Reduce connection overhead (Short And Long)
 - 🔹 Implement Read/Write Replicas → Improve scalability
 
  **Network & Security Optimization**
