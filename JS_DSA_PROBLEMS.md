@@ -385,21 +385,21 @@ Output 2:
 }
 
 
-function flattern (obj, parentkey) {
-      for(let key in obj) {
-         const newParent = parentkey + '.' + key;
+function flattenObject(obj, parentKey = "", result = {}) {
+  for (let key in obj) {
+    const newKey = parentKey ? `${parentKey}.${key}` : key;
 
-          //const newParent = parentkey + key; for out put 2
-
-         if( typeof obj[key] === "object") {
-               flattern(obj[key], newParent);
-         }else{
-            result[newParent] = obj[key];
-         }
-      }
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      flattenObject(obj[key], newKey, result);
+    } else {
+      result[newKey] = obj[key];
+    }
+  }
+  console.log(result);
+  return result;
 }
 
-flattern(userObj, "user");
+flattenObject(userObj, "user" , result = {});
 
 ```
 
