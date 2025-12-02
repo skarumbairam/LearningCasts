@@ -414,18 +414,19 @@ Approach 1:
    3. Create obj push function arguments as key and result of the function as value
    4. When next time executing same function will check the same params as key in the object, if yes return quickly from object instead calculating
 
-function memoized (cbFn, context) {
-  const result = {};
-  return function (...args) {
-    const cacheArgs = JSON.stringify(args);
-    
-    if(!result[cacheArgs]){
-      result[cacheArgs] = cbFn.call(context || this, ...args);
+function momized (fun) {
+    const cache = {};
+    return function (..args) {
+        let key = JSON.stringify(args);
+        if(cache[key]) {
+            console.log("Value Return From Cache", key)
+            return cache[key];
+        }
+        const result = fn.apply(this, args);
+        cache[key] = result;
+        return result;
     }
-    console.log(result);
-    return result[cacheArgs];
-  }
-};
+}
 
 function product (a, b) {
   for(let i=0; i<10000000; i++){};
